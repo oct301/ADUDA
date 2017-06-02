@@ -27,6 +27,7 @@ class My_info_ViewController: UIViewController {
     @IBOutlet weak var free_rank_picker: UIPickerView!
     @IBOutlet weak var free_rank_num_picker: UIPickerView!
 
+    @IBOutlet weak var Most_Champion1: UIView!
     //var ref : FIRDatabaseReference!
     let rootRef = FIRDatabase.database().reference()
 
@@ -45,7 +46,7 @@ class My_info_ViewController: UIViewController {
         if filemgr.fileExists(atPath: dataFilePath!) {
             let dataArray = NSKeyedUnarchiver.unarchiveObject(withFile: dataFilePath!) as! [String]
             name.text = dataArray[0]
-            rank.text = dataArray[1]
+            //rank.text = dataArray[1]
         }
         //Tier_Select.dataSource =
         
@@ -63,9 +64,9 @@ class My_info_ViewController: UIViewController {
     
     @IBAction func Done(_ sender: Any) {
         let source_name = String(name.text!)
-        let source_rank = String(rank.text!)
+        //let source_rank = String(rank.text!)
         users.Name = source_name!
-        users.Rank = source_rank!
+        //users.Rank = source_rank!
         
         
         //itemRef.setValue(users.Name) //데이터베이스에 설정이 안 됨.
@@ -86,7 +87,7 @@ class My_info_ViewController: UIViewController {
         //self.show(dialog, sender: nil)
         self.present(dialog, animated:true, completion:nil)
         
-        var contactArray = [name.text, rank.text]
+        var contactArray = [name.text]
         NSKeyedArchiver.archiveRootObject(contactArray, toFile: dataFilePath!)
         rootRef.child("name").setValue(self.name.text)
         

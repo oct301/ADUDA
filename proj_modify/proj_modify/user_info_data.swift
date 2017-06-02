@@ -8,15 +8,22 @@
 
 import Foundation
 
+struct R {
+    var Tier:String
+    var Tier_num:Int
+}
+
 struct User{
     var Name:String
-    var Rank:String
+    var Rank_Solo:R?
+    var Rank_Free:R?
+    var Request:[User]=[]
     init(){
-        Name = "d"
-        Rank = "d"
+        Name = ""
     }
-    init(name: String, rank: String){
+   /* init(name: String, rank: String, rank_num: Int){
         Name = name
-        Rank = rank
-    }
+        
+    }*/
+    
 }
