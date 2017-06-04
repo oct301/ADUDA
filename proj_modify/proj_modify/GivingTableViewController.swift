@@ -1,17 +1,15 @@
 //
-//  Home_TableViewController.swift
+//  GivingTableViewController.swift
 //  proj_modify
 //
-//  Created by sujin on 2017. 5. 25..
+//  Created by 이경준 on 2017. 6. 4..
 //  Copyright © 2017년 sujin. All rights reserved.
 //
 
 import UIKit
-//import Firebase
 
-class Home_TableViewController: UITableViewController {
-    
-    //var ref : FIRDatabaseReference!
+class GivingTableViewController: UITableViewController {
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,16 +35,15 @@ class Home_TableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        let rowCount = list_.count
+        let rowCount = userlist.givingUserInfolist.count
         return rowCount
     }
-
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "List_Cell", for: indexPath)
-
-        let content = list_[indexPath.row]
-        cell.textLabel?.text = content
+        let cell = tableView.dequeueReusableCell(withIdentifier: "givingUserCell", for: indexPath) as! GivinguserTableViewCell
+        
+        cell.userName.text = userlist.givingUserInfolist[indexPath.row].name
+        
         // Configure the cell...
 
         return cell
@@ -95,7 +92,6 @@ class Home_TableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        if segue.identifier = "detail_segue"
     }
     */
 

@@ -8,7 +8,8 @@
 
 import UIKit
 import Firebase
-var users = User()
+//var users = User()
+var Tiers:Dictionary = ["Challenger":[0], "Master":[0], "Diamond":[1, 2, 3, 4, 5], "Platinum":[1, 2, 3, 4, 5], "Gold":[1, 2, 3, 4, 5], "Silver":[1, 2, 3, 4, 5], "Bronze":[1, 2, 3, 4, 5]]
 
 extension String {
     func stringByAppendingPathComponent(path: String) -> String {
@@ -21,13 +22,17 @@ class My_info_ViewController: UIViewController {
     
     @IBOutlet weak var name: UITextField!
     
-    @IBOutlet weak var Tier_Select: UIPickerView!
-    @IBOutlet weak var rank: UITextField!
+    @IBOutlet weak var solo_rank_picker: UIPickerView!
     
-    @IBOutlet weak var free_rank_picker: UIPickerView!
-    @IBOutlet weak var free_rank_num_picker: UIPickerView!
+    @IBOutlet weak var solo_rank_num_picker: UIPickerView!
 
-    @IBOutlet weak var Most_Champion1: UIView!
+    @IBOutlet weak var free_rank_picker: UIPickerView!
+    
+    @IBOutlet weak var free_rank_num_picker: UIPickerView!
+    
+    
+    
+    
     //var ref : FIRDatabaseReference!
     let rootRef = FIRDatabase.database().reference()
 
@@ -65,7 +70,7 @@ class My_info_ViewController: UIViewController {
     @IBAction func Done(_ sender: Any) {
         let source_name = String(name.text!)
         //let source_rank = String(rank.text!)
-        users.Name = source_name!
+ //       users.Name = source_name!
         //users.Rank = source_rank!
         
         
