@@ -34,13 +34,16 @@ class My_info_ViewController: UIViewController {
     
     
     //var ref : FIRDatabaseReference!
-    let rootRef = FIRDatabase.database().reference()
+    let rootRef = FIRDatabase.database().reference(fromURL: "https://aduda-94c8e.firebaseio.com/")
 
     var dataFilePath: String?
     //var user = User()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        name.placeholder = "Name";
+        
         
         let filemgr = FileManager.default
         let dirPaths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
@@ -94,8 +97,23 @@ class My_info_ViewController: UIViewController {
         
         var contactArray = [name.text]
         NSKeyedArchiver.archiveRootObject(contactArray, toFile: dataFilePath!)
-        rootRef.child("name").setValue(self.name.text)
+        //rootRef.child("name").childByAutoId().setValue(self.name.text)
         
+         // firebase database //
+        /*
+        let ref = FIRDatabase.database().reference()
+        let usersReference = ref.child("users").child()
+        let values = ["name": name, "email": email]
+        usersReference.updateChildValues(values, withCompletionBlock: { (err, ref) in
+            
+            if let err = err {
+                print(err)
+                return
+            }
+            
+            self.dismiss(animated: true, completion: nil)
+        })
+        */
 
         
     }
