@@ -591,6 +591,9 @@
                                 <rect key="frame" x="253" y="93" width="52" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="전적보기"/>
+                                <connections>
+                                    <action selector="Record_Link:" destination="k5f-z3-4xu" eventType="touchUpInside" id="wBX-TX-9Ug"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="introduce" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u9M-0J-pkL">
                                 <rect key="frame" x="16" y="570" width="73" height="21"/>

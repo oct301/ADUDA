@@ -30,12 +30,12 @@ class My_info_ViewController: UIViewController {
     
     @IBOutlet weak var free_rank_num_picker: UIPickerView!
     
-    
+    var user_id: String = ""
     
     
     //var ref : FIRDatabaseReference!
-    let rootRef = FIRDatabase.database().reference(fromURL: "https://aduda-94c8e.firebaseio.com/")
-
+    let rootRef = FIRDatabase.database().reference()
+    
     var dataFilePath: String?
     //var user = User()
     
@@ -44,7 +44,7 @@ class My_info_ViewController: UIViewController {
         
         name.placeholder = "Name";
         
-        
+        /*
         let filemgr = FileManager.default
         let dirPaths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
         
@@ -56,30 +56,62 @@ class My_info_ViewController: UIViewController {
             name.text = dataArray[0]
             //rank.text = dataArray[1]
         }
-        //Tier_Select.dataSource =
+        */ // ARCHIVING //
+ 
         
         // Do any additional setup after loading the view.
     }
     
+    
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        let conditionRef = rootRef.child("condition")
-        rootRef.child("condition").observe(.value){ ( snap: FIRDataSnapshot) in
-           // self.name.text = snap.value.debugDescription
+        
+        // 로그인한 유저의 롤 아이디를 띄워줌.
+        let user = FIRAuth.auth()?.currentUser
+        let UserRef = rootRef.child("users").child(user!.uid).child("Info").child("ID")
+        UserRef.observe(.value){ ( snap: FIRDataSnapshot) in
+            if  snap.exists() {
+                self.user_id =  snap.value as! String
+                self.name.text = self.user_id
+            }
         }
-        //rootRef.child("name").setValue(self.name.text)
+    }
+    
+    func alert_window(title_ : String) {
+        let dialog = UIAlertController(title: title_, message: nil, preferredStyle: UIAlertControllerStyle.alert)
+        
+        let okaction = UIAlertAction(title: "확인", style: UIAlertActionStyle.default, handler: nil)
+        
+        dialog.addAction(okaction)
+        
+        self.present(dialog, animated:true, completion:nil)
+    }
+
+    //전적보기
+    @IBAction func Record_Link(_ sender: Any) {
+        var link = "http://fow.kr/find/"
+        link.append(self.name.text!)
+        //http://fow.kr/find/수진
+        if let url = NSURL(string: link){
+            UIApplication.shared.openURL(url as URL)
+        }
     }
     
     @IBAction func Done(_ sender: Any) {
         let source_name = String(name.text!)
-        //let source_rank = String(rank.text!)
- //       users.Name = source_name!
-        //users.Rank = source_rank!
         
+        //ID 안적었을 때
+        if (name.text?.isEmpty)! {
+            alert_window(title_: "enter your ID")
+            return
+        }
         
-        //itemRef.setValue(users.Name) //데이터베이스에 설정이 안 됨.
-        //itemRef.setValue(users.Rank)
-        
+        // Firebase에 유저 정보 저장(롤 아이디, 라인, 모스트챔피언 등 //
+        let user = FIRAuth.auth()?.currentUser
+        let ref = FIRDatabase.database().reference()
+        ref.child("users").child(user!.uid).child("Info").child("ID").setValue(source_name)
+
         
         
         // let dialog = UIAlertController(title: "생성 완료", message: nil, preferredStyle: .alert)
@@ -95,9 +127,10 @@ class My_info_ViewController: UIViewController {
         //self.show(dialog, sender: nil)
         self.present(dialog, animated:true, completion:nil)
         
+        /* ARCHIVING
         var contactArray = [name.text]
         NSKeyedArchiver.archiveRootObject(contactArray, toFile: dataFilePath!)
-        //rootRef.child("name").childByAutoId().setValue(self.name.text)
+        */
         
          // firebase database //
         /*

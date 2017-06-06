@@ -169,6 +169,8 @@ class Login_ViewController: UIViewController {
                 //self.dismiss(animated: true, completion: nil) // 빨리 사라짐 그리고 뒤에꺼 실행 안시키게 함.
                 
                 //다음 스토리보드로 넘어감( 세그 없이 넘어감)
+                 //let loggedin_user = user
+                
                  let nextViewController = self.navigationController?.storyboard?.instantiateViewController(withIdentifier: "myVC") as! UITableViewController
                 self.navigationController?.pushViewController(nextViewController, animated: true)
  
