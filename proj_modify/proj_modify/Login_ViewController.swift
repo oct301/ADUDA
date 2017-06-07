@@ -171,10 +171,12 @@ class Login_ViewController: UIViewController {
                 //다음 스토리보드로 넘어감( 세그 없이 넘어감)
                  //let loggedin_user = user
                 
-                 let nextViewController = self.navigationController?.storyboard?.instantiateViewController(withIdentifier: "myVC") as! UITableViewController
-                self.navigationController?.pushViewController(nextViewController, animated: true)
+                 //let nextViewController = self.navigationController?.storyboard?.instantiateViewController(withIdentifier: "myVC") as! UITabBarController
+              //  let nextViewController = self.storyboard?.instantiateViewController(withIdentifier: "myVC") as! UITabBarController
+
+                //self.navigationController?.pushViewController(nextViewController, animated: true)
  
-                //self.performSegue(withIdentifier: "logged_in_segue", sender: nil)
+                self.performSegue(withIdentifier: "logged_in_segue", sender: nil)
                 /*
                 let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
                 let initViewController: UIViewController = storyboard.instantiateViewController(withIdentifier: "myVC") as! UITableViewController

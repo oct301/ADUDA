@@ -27,6 +27,7 @@ class My_info_ViewController: UIViewController {
     @IBOutlet weak var solo_rank_num_picker: UIPickerView!
 
     @IBOutlet weak var free_rank_picker: UIPickerView!
+    @IBOutlet weak var introduction: UITextField!
     
     @IBOutlet weak var free_rank_num_picker: UIPickerView!
     
@@ -43,6 +44,7 @@ class My_info_ViewController: UIViewController {
         super.viewDidLoad()
         
         name.placeholder = "Name";
+       
         
         /*
         let filemgr = FileManager.default
