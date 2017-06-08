@@ -35,6 +35,9 @@ class My_info_ViewController: UIViewController, UIPickerViewDataSource, UIPicker
     
     @IBOutlet weak var free_rank_num_picker: UIPickerView!
     
+    
+    
+    
     var user_id: String = ""
     
     
@@ -52,6 +55,7 @@ class My_info_ViewController: UIViewController, UIPickerViewDataSource, UIPicker
         solo_rank_num_picker.delegate = self
         free_rank_picker.delegate = self
         free_rank_num_picker.delegate = self
+        
         solo_rank_text.text = "Unranked"
         free_rank_text.text = "Unranked"
         /*
@@ -71,7 +75,6 @@ class My_info_ViewController: UIViewController, UIPickerViewDataSource, UIPicker
         
         // Do any additional setup after loading the view.
     }
-    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
