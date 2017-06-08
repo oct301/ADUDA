@@ -11,6 +11,7 @@
 		0B6279F51EE01DFA004C40FA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0B6279F41EE01DFA004C40FA /* GoogleService-Info.plist */; };
 		0B627A481EE40DCF004C40FA /* GivingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B627A471EE40DCF004C40FA /* GivingTableViewController.swift */; };
 		0B627A4A1EE41A7E004C40FA /* GivinguserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B627A491EE41A7E004C40FA /* GivinguserTableViewCell.swift */; };
+		0B627A891EE7E0FA004C40FA /* lol_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B627A881EE7E0FA004C40FA /* lol_logo.png */; };
 		1A0086BC2849A6B04CBA384E /* Pods_proj_modify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4185C1D91388FC22622FC7E /* Pods_proj_modify.framework */; };
 		6043A2491ED6B99D00B52F0D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6043A2481ED6B99D00B52F0D /* AppDelegate.swift */; };
 		6043A24B1ED6B99D00B52F0D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6043A24A1ED6B99D00B52F0D /* ViewController.swift */; };
@@ -19,7 +20,6 @@
 		6043A25F1ED6D18700B52F0D /* My_info_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6043A25E1ED6D18700B52F0D /* My_info_ViewController.swift */; };
 		6057C2411ED7135500964BDA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6057C23F1ED7135500964BDA /* Main.storyboard */; };
 		6057C2471EE5677C00964BDA /* Login_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6057C2461EE5677C00964BDA /* Login_ViewController.swift */; };
-		6057C2491EE5793C00964BDA /* lol_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 6057C2481EE5793C00964BDA /* lol_logo.png */; };
 		6057C24B1EE7D71000964BDA /* TabBarControllerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6057C24A1EE7D71000964BDA /* TabBarControllerViewController.swift */; };
 		608DE47F1ED6FB63007FDDC5 /* user_info_data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608DE47E1ED6FB63007FDDC5 /* user_info_data.swift */; };
 /* End PBXBuildFile section */
@@ -29,6 +29,7 @@
 		0B6279F41EE01DFA004C40FA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0B627A471EE40DCF004C40FA /* GivingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GivingTableViewController.swift; sourceTree = "<group>"; };
 		0B627A491EE41A7E004C40FA /* GivinguserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GivinguserTableViewCell.swift; sourceTree = "<group>"; };
+		0B627A881EE7E0FA004C40FA /* lol_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lol_logo.png; sourceTree = SOURCE_ROOT; };
 		6043A2451ED6B99D00B52F0D /* proj_modify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = proj_modify.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6043A2481ED6B99D00B52F0D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6043A24A1ED6B99D00B52F0D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -38,7 +39,6 @@
 		6043A25E1ED6D18700B52F0D /* My_info_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = My_info_ViewController.swift; sourceTree = "<group>"; };
 		6057C2401ED7135500964BDA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6057C2461EE5677C00964BDA /* Login_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Login_ViewController.swift; sourceTree = "<group>"; };
-		6057C2481EE5793C00964BDA /* lol_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = lol_logo.png; path = ../../../../Downloads/lol_logo.png; sourceTree = "<group>"; };
 		6057C24A1EE7D71000964BDA /* TabBarControllerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarControllerViewController.swift; sourceTree = "<group>"; };
 		608DE47E1ED6FB63007FDDC5 /* user_info_data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = user_info_data.swift; sourceTree = "<group>"; };
 		79B1633E804877F33CB0BA82 /* Pods-proj_modify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-proj_modify.debug.xcconfig"; path = "Pods/Target Support Files/Pods-proj_modify/Pods-proj_modify.debug.xcconfig"; sourceTree = "<group>"; };
@@ -80,7 +80,7 @@
 			isa = PBXGroup;
 			children = (
 				6057C23F1ED7135500964BDA /* Main.storyboard */,
-				6057C2481EE5793C00964BDA /* lol_logo.png */,
+				0B627A881EE7E0FA004C40FA /* lol_logo.png */,
 				6043A2481ED6B99D00B52F0D /* AppDelegate.swift */,
 				6043A24A1ED6B99D00B52F0D /* ViewController.swift */,
 				6043A24F1ED6B99D00B52F0D /* Assets.xcassets */,
@@ -179,7 +179,7 @@
 			files = (
 				0B6279EF1EE015DD004C40FA /* Champion_image in Resources */,
 				6043A2531ED6B99D00B52F0D /* LaunchScreen.storyboard in Resources */,
-				6057C2491EE5793C00964BDA /* lol_logo.png in Resources */,
+				0B627A891EE7E0FA004C40FA /* lol_logo.png in Resources */,
 				0B6279F51EE01DFA004C40FA /* GoogleService-Info.plist in Resources */,
 				6043A2501ED6B99D00B52F0D /* Assets.xcassets in Resources */,
 				6057C2411ED7135500964BDA /* Main.storyboard in Resources */,
