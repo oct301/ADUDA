@@ -13,6 +13,9 @@ import Firebase
 let Tiers:[String] = ["Challenger", "Master", "Diamond", "Platinum", "Gold", "Silver", "Bronze", "Unranked"]
 let Nums1:[String] = ["0"]
 let Nums2:[String] = ["1", "2", "3", "4", "5"]
+var cur_user = mod_user()
+
+
 
 extension String {
     func stringByAppendingPathComponent(path: String) -> String {
@@ -23,22 +26,33 @@ extension String {
 
 class My_info_ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
 
+    @IBOutlet weak var free_rank_label: UILabel!
+    @IBOutlet weak var solo_rank_label: UILabel!
+    
     @IBOutlet weak var name: UITextField!
     
-    @IBOutlet weak var solo_rank_text: UILabel!
     @IBOutlet weak var solo_rank_picker: UIPickerView!
     
     @IBOutlet weak var solo_rank_num_picker: UIPickerView!
 
-    @IBOutlet weak var free_rank_text: UILabel!
     @IBOutlet weak var free_rank_picker: UIPickerView!
     
     @IBOutlet weak var free_rank_num_picker: UIPickerView!
     
+    // 데이터베이스 찾기를 위해 임시로
+    @IBOutlet weak var Line_1: UISegmentedControl!
     
+    @IBOutlet weak var Line_2: UISegmentedControl!
     
+    var is_initial:Bool = false
+    //
+    
+    var sol_rank: String = ""
+    var fre_rank: String = ""
     
     var user_id: String = ""
+    
+    let user = FIRAuth.auth()?.currentUser
     
     
     //var ref : FIRDatabaseReference!
@@ -56,8 +70,50 @@ class My_info_ViewController: UIViewController, UIPickerViewDataSource, UIPicker
         free_rank_picker.delegate = self
         free_rank_num_picker.delegate = self
         
-        solo_rank_text.text = "Unranked"
-        free_rank_text.text = "Unranked"
+        
+        var UserRef = rootRef.child("users").child(user!.uid).child("Info")
+        UserRef.observe(.value){ ( snap: FIRDataSnapshot) in
+            if  snap.exists() {
+                if let dictionary = snap.value as? [String: AnyObject] {
+                    let tmp = mod_user(dictionary: dictionary)
+                    cur_user = tmp
+                }
+            }
+        }
+
+        
+        UserRef = rootRef.child("users").child(user!.uid).child("Info").child("Rank_Free")
+        UserRef.observe(.value){ ( snap: FIRDataSnapshot) in
+            if  snap.exists() {
+                //self.user_id =  snap.value as! String
+                //self.name.text = self.user_id
+                self.free_rank_label.text = snap.value as! String
+                
+                self.free_rank_picker.isHidden = true
+                self.free_rank_num_picker.isHidden = true
+                self.solo_rank_picker.isHidden = true
+                self.solo_rank_num_picker.isHidden = true
+            }
+            else {
+                self.is_initial = true
+                self.free_rank_label.isHidden = true
+            }
+        }
+        
+        UserRef = rootRef.child("users").child(user!.uid).child("Info").child("Rank_Solo")
+        UserRef.observe(.value){ ( snap: FIRDataSnapshot) in
+            if  snap.exists() {
+                //self.user_id =  snap.value as! String
+                //self.name.text = self.user_id
+                self.solo_rank_label.text = snap.value as! String
+            }
+            else {
+                self.solo_rank_label.isHidden = true
+            }
+        }
+
+
+        
         /*
         let filemgr = FileManager.default
         let dirPaths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
@@ -154,7 +210,8 @@ class My_info_ViewController: UIViewController, UIPickerViewDataSource, UIPicker
             if solo_rank != 0 && solo_rank != 1 && solo_rank != 7 {
                 n = Nums2[solo_rank_num_picker.selectedRow(inComponent: 0)]
             }
-            solo_rank_text.text = t + "" + n
+            sol_rank = t + "" + n
+            
         }
         else {
             let free_rank = free_rank_picker.selectedRow(inComponent: 0)
@@ -163,7 +220,7 @@ class My_info_ViewController: UIViewController, UIPickerViewDataSource, UIPicker
             if free_rank != 0 && free_rank != 1 && free_rank != 7 {
                 n = Nums2[free_rank_num_picker.selectedRow(inComponent: 0)]
             }
-            free_rank_text.text = t + "" + n
+            fre_rank = t + "" + n
             
         }
     }
@@ -174,7 +231,6 @@ class My_info_ViewController: UIViewController, UIPickerViewDataSource, UIPicker
         super.viewDidAppear(animated)
         
         // 로그인한 유저의 롤 아이디를 띄워줌.
-        let user = FIRAuth.auth()?.currentUser
         let UserRef = rootRef.child("users").child(user!.uid).child("Info").child("ID")
         UserRef.observe(.value){ ( snap: FIRDataSnapshot) in
             if  snap.exists() {
@@ -196,9 +252,9 @@ class My_info_ViewController: UIViewController, UIPickerViewDataSource, UIPicker
 
     //전적보기
     @IBAction func Record_Link(_ sender: Any) {
-        var link = "http://fow.kr/find/"
+        var link = "https://www.op.gg/summoner/userName="
         link.append(self.name.text!)
-        //http://fow.kr/find/수진
+        //https://www.op.gg/summoner/userName=
         if let url = NSURL(string: link){
             UIApplication.shared.openURL(url as URL)
         }
@@ -217,6 +273,24 @@ class My_info_ViewController: UIViewController, UIPickerViewDataSource, UIPicker
         let user = FIRAuth.auth()?.currentUser
         let ref = FIRDatabase.database().reference()
         ref.child("users").child(user!.uid).child("Info").child("ID").setValue(source_name)
+        
+        //라벨만 뜬 상태에서 다른 거 수정한다고 done을 눌리면 피커뷰는 아무 것도 설정 안된 상태라서 공백이 들어가게 되고 그럼 라벨에 공백이 떠서 랭크에 아무것도 안보이게 됨.
+        if is_initial == true {
+            ref.child("users").child(user!.uid).child("Info").child("Rank_Solo").setValue(sol_rank)
+            ref.child("users").child(user!.uid).child("Info").child("Rank_Free").setValue(fre_rank)
+            is_initial = false
+        }
+        
+        //선호라인 데아터베이스 업데이트
+        ref.child("users").child(user!.uid).child("Info").child("Line_1").setValue(Line_1.titleForSegment(at: Line_1.selectedSegmentIndex)!)
+        ref.child("users").child(user!.uid).child("Info").child("Line_2").setValue(Line_2.titleForSegment(at: Line_2.selectedSegmentIndex)!)
+
+        //ref.child("users").child(user!.uid).child("Info").child("Line_1").setValue(Line_1.debugDescription)
+        //ref.child("users").child(user!.uid).child("Info").child("Line_2").setValue(fre_rank)
+
+
+        solo_rank_label.isHidden = false
+        free_rank_label.isHidden = false
 
         
         

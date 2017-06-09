@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class GivingTableViewController: UITableViewController {
 
@@ -14,11 +15,16 @@ class GivingTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        fetchUser()
+        
+    }
+    
+    func fetchUser() {
+        FIRDatabase.database().reference().child("users").observe(.childAdded, with: { (snapshot) in
+            
+            print(snapshot)
+            
+        } , withCancel: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -42,7 +48,7 @@ class GivingTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "givingUserCell", for: indexPath) as! GivinguserTableViewCell
         
-        cell.userName.text = userlist.givingUserInfolist[indexPath.row].name
+        cell.userName.text = userlist.givingUserInfolist[indexPath.row].ID
         
         // Configure the cell...
 
