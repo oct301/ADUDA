@@ -23,6 +23,10 @@ class mod_user {
     var Rank_Free:String?
     var Rank_Solo:String?
     var introduce:String?
+    var Champion1:String?
+    var Champion2:String?
+    var Champion3:String?
+    var Champion4:String?
     init(dictionary: [String: Any]) {
         self.ID = dictionary["ID"] as? String ?? ""
         self.Line_1 = dictionary["Line_1"] as? String ?? ""
@@ -38,6 +42,10 @@ class mod_user {
         self.Rank_Free = ""
         self.Rank_Solo = ""
         self.introduce = ""
+        self.Champion1 = ""
+        self.Champion2 = ""
+        self.Champion3 = ""
+        self.Champion4 = ""
     }
 }
 

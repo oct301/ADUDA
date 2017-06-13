@@ -9,12 +9,14 @@
 import UIKit
 import Firebase
 
-let Tiers:[String] = ["Challenger", "Master", "Diamond", "Platinum", "Gold", "Silver", "Bronze", "Unranked"]
-let Nums1:[String] = ["0"]
-let Nums2:[String] = ["1", "2", "3", "4", "5"]
-var cur_user = mod_user()
+let nameList:[String] = ["Aatrox", "Ahri", "Akali", "Alistar", "Amumu", "Anivia", "Annie", "Ashe", "AurelionSol", "Azir", "Bard", "Blitzcrank", "Brand", "Braum", "Caitlyn", "Camille", "Cassiopeia", "Chogath", "Corki", "Darius", "Diana", "Draven", "DrMundo", "Ekko", "Elise", "Evelynn", "Ezreal", "Fiddlesticks", "Fiora", "Fizz", "Galio", "Gangplank", "Garen", "Gnar", "Gragas", "Graves", "Hecarim", "Heimerdinger", "Illaoi", "Irelia", "Ivern", "Janna", "JarvanIV", "Jax", "Jayce", "Jhin", "Kalista", "Karma", "Karthus", "Kassadin", "Katarina", "Kayle", "Kennen", "Khazix", "Kindred", "Kled", "KogMaw", "Leblanc", "LeeSin", "Leona", "Lissandra", "Lucian", "Lulu", "Lux", "Malphite", "Malzahar", "Maokai", "MasterYi", "MissFortune", "MonkeyKing", "Mordekaiser", "Morgana", "Nami", "Nasus", "Nautilus", "Nidalee", "Nocturne", "Nunu", "Olaf", "Orianna", "Pantheon", "Poppy", "Quinn", "Rakan", "Rammus", "RekSai", "Renekton", "Rengar", "Riven", "Rumble", "Ryze", "Sejuani", "Shaco", "Shen", "Shyvana", "Singed", "Sion", "Sivir", "Skarner", "Sona", "Soraka", "Swain","Syndra", "TahmKench", "Taliyah", "Talon", "Taric", "Teemo", "Thresh", "Tristana", "Trundle", "Tryndamere", "TwistedFate", "Twitch", "Udyr", "Urgot", "Varus", "Vayne", "Veigar", "Velkoz", "Vi", "Viktor", "Vladimir", "Volibear", "Warwick", "Xayah", "Xerath", "XinZhao", "Yasuo", "Yorick", "Zac", "Zed", "Ziggs", "Zilean", "Zyra"]
 
-class new_myinfo: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+let Tiers:[String] = ["Challenger", "Master", "Diamond", "Platinum", "Gold", "Silver", "Bronze", "Unranked"]
+let Nums:[String] = ["1", "2", "3", "4", "5"]
+var cur_user = mod_user()
+var cham_num = 0
+
+class new_myinfo: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
     
     @IBOutlet weak var userID: UILabel!
     @IBOutlet weak var modify_userID: UITextField!
@@ -70,6 +72,40 @@ class new_myinfo: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate
     var user_id: String = ""
     
     let user = FIRAuth.auth()?.currentUser
+    
+    @IBOutlet var ChamView: UIView!
+    @IBOutlet weak var ChamCollectionView: UICollectionView!
+    @IBAction func Cham_pick1(_ sender: Any) {
+        cham_num = 1
+        self.view.addSubview(ChamView)
+        ChamView.center = self.view.center
+    }
+    @IBOutlet weak var Button1: UIButton!
+    @IBOutlet weak var ChamImage1: UIImageView!
+    
+    @IBAction func Cham_pick2(_ sender: Any) {
+        cham_num = 2
+        self.view.addSubview(ChamView)
+        ChamView.center = self.view.center
+    }
+    @IBOutlet weak var Button2: UIButton!
+    @IBOutlet weak var ChamImage2: UIImageView!
+    
+    @IBAction func Cham_pick3(_ sender: Any) {
+        cham_num = 3
+        self.view.addSubview(ChamView)
+        ChamView.center = self.view.center
+    }
+    @IBOutlet weak var Button3: UIButton!
+    @IBOutlet weak var ChamImage3: UIImageView!
+    
+    @IBAction func Cham_pick4(_ sender: Any) {
+        cham_num = 4
+        self.view.addSubview(ChamView)
+        ChamView.center = self.view.center
+    }
+    @IBOutlet weak var Button4: UIButton!
+    @IBOutlet weak var ChamImage4: UIImageView!
     
     
     //var ref : FIRDatabaseReference!
@@ -189,6 +225,8 @@ class new_myinfo: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate
         solo_rank_num_picker.delegate = self
         free_rank_picker.delegate = self
         free_rank_num_picker.delegate = self
+        ChamCollectionView.delegate = self
+        ChamCollectionView.dataSource = self
         
         var UserRef = rootRef.child("users").child(user!.uid).child("Info")
         UserRef.observe(.value){ ( snap: FIRDataSnapshot) in
@@ -206,6 +244,51 @@ class new_myinfo: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate
        
     }
     
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        return 1
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of items
+        return nameList.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "chamcell", for: indexPath) as! ChamSelectCollectionViewCell
+        
+        // Configure the cell
+        cell.cham_name.text = nameList[indexPath.row]
+        // cell.cham_image.image = UIImage(named: "Champion_image/"+nameList[indexPath.row]+".png")
+        cell.cham_image.image = UIImage(named: nameList[indexPath.row])
+        return cell
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if cham_num == 1 {
+            cur_user.Champion1 = nameList[indexPath.row]
+            Button1.imageView?.image = UIImage(named: nameList[indexPath.row])
+            ChamImage1.image = UIImage(named: nameList[indexPath.row])
+        }
+        else if cham_num == 2 {
+            cur_user.Champion2 = nameList[indexPath.row]
+            Button2.imageView?.image = UIImage(named: nameList[indexPath.row])
+            ChamImage2.image = UIImage(named: nameList[indexPath.row])
+        }
+        else if cham_num == 3 {
+            cur_user.Champion3 = nameList[indexPath.row]
+            Button3.imageView?.image = UIImage(named: nameList[indexPath.row])
+            ChamImage3.image = UIImage(named: nameList[indexPath.row])
+        }
+        else {
+            cur_user.Champion4 = nameList[indexPath.row]
+            Button4.imageView?.image = UIImage(named: nameList[indexPath.row])
+            ChamImage4.image = UIImage(named: nameList[indexPath.row])
+        }
+        ChamView.removeFromSuperview()
+        
+    }
+
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -219,7 +302,7 @@ class new_myinfo: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate
             case 0...1:
                 return 0
             case 2...6:
-                return Nums2.count
+                return Nums.count
             case 7:
                 return 0
             default:
@@ -231,7 +314,7 @@ class new_myinfo: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate
             case 0...1:
                 return 0
             case 2...6:
-                return Nums2.count
+                return Nums.count
             case 7:
                 return 0
             default:
@@ -251,7 +334,7 @@ class new_myinfo: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate
             case 0...1:
                 return ""
             case 2...6:
-                return Nums2[row]
+                return Nums[row]
             case 7:
                 return ""
             default:
@@ -268,7 +351,7 @@ class new_myinfo: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate
             case 0...1:
                 return ""
             case 2...6:
-                return Nums2[row]
+                return Nums[row]
             case 7:
                 return ""
             default:
@@ -283,7 +366,7 @@ class new_myinfo: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate
             let t:String = Tiers[solo_rank]
             var n:String = ""
             if solo_rank != 0 && solo_rank != 1 && solo_rank != 7 {
-                n = Nums2[solo_rank_num_picker.selectedRow(inComponent: 0)]
+                n = Nums[solo_rank_num_picker.selectedRow(inComponent: 0)]
             }
             sol_rank = t + "" + n
             
@@ -293,7 +376,7 @@ class new_myinfo: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate
             let t:String = Tiers[free_rank]
             var n:String = ""
             if free_rank != 0 && free_rank != 1 && free_rank != 7 {
-                n = Nums2[free_rank_num_picker.selectedRow(inComponent: 0)]
+                n = Nums[free_rank_num_picker.selectedRow(inComponent: 0)]
             }
             fre_rank = t + "" + n
             

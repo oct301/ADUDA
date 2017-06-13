@@ -138,7 +138,7 @@ class My_info_ViewController: UIViewController, UIPickerViewDataSource, UIPicker
             case 0...1:
                 return 0
             case 2...6:
-                return Nums2.count
+                return Nums.count
             case 7:
                 return 0
             default:
@@ -150,7 +150,7 @@ class My_info_ViewController: UIViewController, UIPickerViewDataSource, UIPicker
             case 0...1:
                 return 0
             case 2...6:
-                return Nums2.count
+                return Nums.count
             case 7:
                 return 0
             default:
@@ -170,7 +170,7 @@ class My_info_ViewController: UIViewController, UIPickerViewDataSource, UIPicker
             case 0...1:
                 return ""
             case 2...6:
-                return Nums2[row]
+                return Nums[row]
             case 7:
                 return ""
             default:
@@ -187,7 +187,7 @@ class My_info_ViewController: UIViewController, UIPickerViewDataSource, UIPicker
             case 0...1:
                 return ""
             case 2...6:
-                return Nums2[row]
+                return Nums[row]
             case 7:
                 return ""
             default:
@@ -202,7 +202,7 @@ class My_info_ViewController: UIViewController, UIPickerViewDataSource, UIPicker
             let t:String = Tiers[solo_rank]
             var n:String = ""
             if solo_rank != 0 && solo_rank != 1 && solo_rank != 7 {
-                n = Nums2[solo_rank_num_picker.selectedRow(inComponent: 0)]
+                n = Nums[solo_rank_num_picker.selectedRow(inComponent: 0)]
             }
             sol_rank = t + "" + n
             
@@ -212,7 +212,7 @@ class My_info_ViewController: UIViewController, UIPickerViewDataSource, UIPicker
             let t:String = Tiers[free_rank]
             var n:String = ""
             if free_rank != 0 && free_rank != 1 && free_rank != 7 {
-                n = Nums2[free_rank_num_picker.selectedRow(inComponent: 0)]
+                n = Nums[free_rank_num_picker.selectedRow(inComponent: 0)]
             }
             fre_rank = t + "" + n
             
