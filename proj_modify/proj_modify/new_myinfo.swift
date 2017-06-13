@@ -16,8 +16,8 @@ let Nums:[String] = ["1", "2", "3", "4", "5"]
 var cur_user = mod_user()
 var cham_num = 0
 
-class new_myinfo: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
-    
+class new_myinfo: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource,UISearchBarDelegate {
+    var issearch : Bool = false
     @IBOutlet weak var userID: UILabel!
     @IBOutlet weak var modify_userID: UITextField!
     
@@ -107,7 +107,35 @@ class new_myinfo: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate
     @IBOutlet weak var Button4: UIButton!
     @IBOutlet weak var ChamImage4: UIImageView!
     
+    @IBOutlet weak var cham_search: UISearchBar!
     
+    var filter:[String]=[]
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        issearch=true
+    }
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        issearch=false
+    }
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        issearch=false
+    }
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        issearch=false
+    }
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty{
+            filter=nameList
+            
+        }
+        else{
+            filter=nameList.filter({(name)->Bool in
+                    return name.contains(searchText)
+                
+            })
+        }
+        self.ChamCollectionView.reloadData()
+    }
     //var ref : FIRDatabaseReference!
     let rootRef = FIRDatabase.database().reference()
     
@@ -227,6 +255,7 @@ class new_myinfo: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate
         free_rank_num_picker.delegate = self
         ChamCollectionView.delegate = self
         ChamCollectionView.dataSource = self
+        cham_search.delegate = self
         
         var UserRef = rootRef.child("users").child(user!.uid).child("Info")
         UserRef.observe(.value){ ( snap: FIRDataSnapshot) in
@@ -252,38 +281,74 @@ class new_myinfo: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return nameList.count
+        if issearch == true {
+            return filter.count
+        }
+        else {
+            return nameList.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "chamcell", for: indexPath) as! ChamSelectCollectionViewCell
-        
-        // Configure the cell
-        cell.cham_name.text = nameList[indexPath.row]
-        // cell.cham_image.image = UIImage(named: "Champion_image/"+nameList[indexPath.row]+".png")
-        cell.cham_image.image = UIImage(named: nameList[indexPath.row])
+        if issearch == true {
+            cell.cham_name.text = filter[indexPath.row]
+            cell.cham_image.image = UIImage(named: filter[indexPath.row])
+        }
+        else {
+            cell.cham_name.text = nameList[indexPath.row]
+            cell.cham_image.image = UIImage(named: nameList[indexPath.row])
+        }
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if cham_num == 1 {
-            cur_user.Champion1 = nameList[indexPath.row]
-            Button1.imageView?.image = UIImage(named: nameList[indexPath.row])
-            ChamImage1.image = UIImage(named: nameList[indexPath.row])
+            if issearch == true {
+                cur_user.Champion1 = filter[indexPath.row]
+                Button1.imageView?.image = UIImage(named: filter[indexPath.row])
+                ChamImage1.image = UIImage(named: filter[indexPath.row])
+            }
+            else {
+                cur_user.Champion1 = nameList[indexPath.row]
+                Button1.imageView?.image = UIImage(named: nameList[indexPath.row])
+                ChamImage1.image = UIImage(named: nameList[indexPath.row])
+            }
         }
         else if cham_num == 2 {
-            cur_user.Champion2 = nameList[indexPath.row]
-            Button2.imageView?.image = UIImage(named: nameList[indexPath.row])
-            ChamImage2.image = UIImage(named: nameList[indexPath.row])
+            if issearch == true {
+                cur_user.Champion2 = filter[indexPath.row]
+                Button2.imageView?.image = UIImage(named: filter[indexPath.row])
+                ChamImage2.image = UIImage(named: filter[indexPath.row])
+            }
+            else {
+                cur_user.Champion2 = nameList[indexPath.row]
+                Button2.imageView?.image = UIImage(named: nameList[indexPath.row])
+                ChamImage2.image = UIImage(named: nameList[indexPath.row])
+            }
         }
         else if cham_num == 3 {
-            cur_user.Champion3 = nameList[indexPath.row]
-            Button3.imageView?.image = UIImage(named: nameList[indexPath.row])
-            ChamImage3.image = UIImage(named: nameList[indexPath.row])
+            if issearch == true {
+                cur_user.Champion3 = filter[indexPath.row]
+                Button3.imageView?.image = UIImage(named: filter[indexPath.row])
+                ChamImage3.image = UIImage(named: filter[indexPath.row])
+            }
+            else {
+                cur_user.Champion3 = nameList[indexPath.row]
+                Button3.imageView?.image = UIImage(named: nameList[indexPath.row])
+                ChamImage3.image = UIImage(named: nameList[indexPath.row])
+            }
         }
         else {
-            cur_user.Champion4 = nameList[indexPath.row]
-            Button4.imageView?.image = UIImage(named: nameList[indexPath.row])
-            ChamImage4.image = UIImage(named: nameList[indexPath.row])
+            if issearch == true {
+                cur_user.Champion4 = filter[indexPath.row]
+                Button4.imageView?.image = UIImage(named: filter[indexPath.row])
+                ChamImage4.image = UIImage(named: filter[indexPath.row])
+            }
+            else {
+                cur_user.Champion4 = nameList[indexPath.row]
+                Button4.imageView?.image = UIImage(named: nameList[indexPath.row])
+                ChamImage4.image = UIImage(named: nameList[indexPath.row])
+            }
         }
         ChamView.removeFromSuperview()
         
