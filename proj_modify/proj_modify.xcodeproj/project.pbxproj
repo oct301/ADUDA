@@ -28,6 +28,15 @@
 		6057C2751EE98FE400964BDA /* Searching_List_Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6057C2741EE98FE400964BDA /* Searching_List_Controller.swift */; };
 		6057C2771EE9BE5900964BDA /* Search_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6057C2761EE9BE5900964BDA /* Search_ViewController.swift */; };
 		6057C2791EE9C3CF00964BDA /* search_data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6057C2781EE9C3CF00964BDA /* search_data.swift */; };
+		6057C27B1EEBA43000964BDA /* zedd.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 6057C27A1EEBA43000964BDA /* zedd.jpeg */; };
+		6057C27D1EEBA45E00964BDA /* new_login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6057C27C1EEBA45E00964BDA /* new_login.swift */; };
+		6057C27F1EECF11700964BDA /* moon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6057C27E1EECF11700964BDA /* moon.png */; };
+		6057C2811EECF45400964BDA /* zeddd.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 6057C2801EECF45400964BDA /* zeddd.jpeg */; };
+		6057C2831EEF21E600964BDA /* new_myinfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6057C2821EEF21E600964BDA /* new_myinfo.swift */; };
+		6057C2851EEF4AFE00964BDA /* tmp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6057C2841EEF4AFE00964BDA /* tmp.swift */; };
+		6057C2871EEF555000964BDA /* searched_user_info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6057C2861EEF555000964BDA /* searched_user_info.swift */; };
+		6057C2891EEF63E800964BDA /* received_request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6057C2881EEF63E800964BDA /* received_request.swift */; };
+		6057C28B1EEF63FB00964BDA /* sending_request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6057C28A1EEF63FB00964BDA /* sending_request.swift */; };
 		608DE47F1ED6FB63007FDDC5 /* user_info_data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608DE47E1ED6FB63007FDDC5 /* user_info_data.swift */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +63,15 @@
 		6057C2741EE98FE400964BDA /* Searching_List_Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Searching_List_Controller.swift; sourceTree = "<group>"; };
 		6057C2761EE9BE5900964BDA /* Search_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Search_ViewController.swift; sourceTree = "<group>"; };
 		6057C2781EE9C3CF00964BDA /* search_data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = search_data.swift; sourceTree = "<group>"; };
+		6057C27A1EEBA43000964BDA /* zedd.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = zedd.jpeg; path = ../../../../Downloads/zedd.jpeg; sourceTree = "<group>"; };
+		6057C27C1EEBA45E00964BDA /* new_login.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = new_login.swift; sourceTree = "<group>"; };
+		6057C27E1EECF11700964BDA /* moon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = moon.png; path = ../../../../Downloads/moon.png; sourceTree = "<group>"; };
+		6057C2801EECF45400964BDA /* zeddd.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = zeddd.jpeg; path = ../../../../Downloads/zeddd.jpeg; sourceTree = "<group>"; };
+		6057C2821EEF21E600964BDA /* new_myinfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = new_myinfo.swift; sourceTree = "<group>"; };
+		6057C2841EEF4AFE00964BDA /* tmp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tmp.swift; sourceTree = "<group>"; };
+		6057C2861EEF555000964BDA /* searched_user_info.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = searched_user_info.swift; sourceTree = "<group>"; };
+		6057C2881EEF63E800964BDA /* received_request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = received_request.swift; sourceTree = "<group>"; };
+		6057C28A1EEF63FB00964BDA /* sending_request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sending_request.swift; sourceTree = "<group>"; };
 		608DE47E1ED6FB63007FDDC5 /* user_info_data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = user_info_data.swift; sourceTree = "<group>"; };
 		79B1633E804877F33CB0BA82 /* Pods-proj_modify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-proj_modify.debug.xcconfig"; path = "Pods/Target Support Files/Pods-proj_modify/Pods-proj_modify.debug.xcconfig"; sourceTree = "<group>"; };
 		A4185C1D91388FC22622FC7E /* Pods_proj_modify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_proj_modify.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -101,13 +119,16 @@
 				0B627A921EE93200004C40FA /* Aatrox.png */,
 				0B627A941EE93206004C40FA /* Ahri.png */,
 				6043A24A1ED6B99D00B52F0D /* ViewController.swift */,
+				0B6279EE1EE015DD004C40FA /* Champion_image */,
 				6043A24F1ED6B99D00B52F0D /* Assets.xcassets */,
+				6057C27E1EECF11700964BDA /* moon.png */,
+				6057C2801EECF45400964BDA /* zeddd.jpeg */,
+				6057C27A1EEBA43000964BDA /* zedd.jpeg */,
 				6043A2511ED6B99D00B52F0D /* LaunchScreen.storyboard */,
 				0B6279F41EE01DFA004C40FA /* GoogleService-Info.plist */,
 				6043A2541ED6B99D00B52F0D /* Info.plist */,
 				6043A25E1ED6D18700B52F0D /* My_info_ViewController.swift */,
 				608DE47E1ED6FB63007FDDC5 /* user_info_data.swift */,
-				0B6279EE1EE015DD004C40FA /* Champion_image */,
 				0B627A471EE40DCF004C40FA /* GivingTableViewController.swift */,
 				0B627A491EE41A7E004C40FA /* GivinguserTableViewCell.swift */,
 				6057C2461EE5677C00964BDA /* Login_ViewController.swift */,
@@ -115,6 +136,12 @@
 				6057C2741EE98FE400964BDA /* Searching_List_Controller.swift */,
 				6057C2761EE9BE5900964BDA /* Search_ViewController.swift */,
 				6057C2781EE9C3CF00964BDA /* search_data.swift */,
+				6057C27C1EEBA45E00964BDA /* new_login.swift */,
+				6057C2821EEF21E600964BDA /* new_myinfo.swift */,
+				6057C2841EEF4AFE00964BDA /* tmp.swift */,
+				6057C2861EEF555000964BDA /* searched_user_info.swift */,
+				6057C2881EEF63E800964BDA /* received_request.swift */,
+				6057C28A1EEF63FB00964BDA /* sending_request.swift */,
 			);
 			path = proj_modify;
 			sourceTree = "<group>";
@@ -204,8 +231,11 @@
 				0B6279F51EE01DFA004C40FA /* GoogleService-Info.plist in Resources */,
 				6043A2501ED6B99D00B52F0D /* Assets.xcassets in Resources */,
 				0B627A931EE93200004C40FA /* Aatrox.png in Resources */,
+				6057C27F1EECF11700964BDA /* moon.png in Resources */,
 				6057C2411ED7135500964BDA /* Main.storyboard in Resources */,
+				6057C27B1EEBA43000964BDA /* zedd.jpeg in Resources */,
 				0B627A951EE93206004C40FA /* Ahri.png in Resources */,
+				6057C2811EECF45400964BDA /* zeddd.jpeg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,13 +299,19 @@
 				6043A2491ED6B99D00B52F0D /* AppDelegate.swift in Sources */,
 				0B627A911EE92F69004C40FA /* SelectTableViewController.swift in Sources */,
 				608DE47F1ED6FB63007FDDC5 /* user_info_data.swift in Sources */,
+				6057C2851EEF4AFE00964BDA /* tmp.swift in Sources */,
 				0B627A4A1EE41A7E004C40FA /* GivinguserTableViewCell.swift in Sources */,
+				6057C28B1EEF63FB00964BDA /* sending_request.swift in Sources */,
+				6057C2871EEF555000964BDA /* searched_user_info.swift in Sources */,
+				6057C2891EEF63E800964BDA /* received_request.swift in Sources */,
+				6057C2831EEF21E600964BDA /* new_myinfo.swift in Sources */,
 				6057C2791EE9C3CF00964BDA /* search_data.swift in Sources */,
 				0B627A8B1EE92CF6004C40FA /* SelectTableViewCell.swift in Sources */,
 				6057C2471EE5677C00964BDA /* Login_ViewController.swift in Sources */,
 				6057C24B1EE7D71000964BDA /* TabBarControllerViewController.swift in Sources */,
 				6057C2751EE98FE400964BDA /* Searching_List_Controller.swift in Sources */,
 				6057C2771EE9BE5900964BDA /* Search_ViewController.swift in Sources */,
+				6057C27D1EEBA45E00964BDA /* new_login.swift in Sources */,
 				6043A25F1ED6D18700B52F0D /* My_info_ViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

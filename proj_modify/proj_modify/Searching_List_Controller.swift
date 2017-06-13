@@ -49,10 +49,9 @@ class Searching_List_Controller: UITableViewController {
     // 내 티어 이상
     func select_rank_type_3 (hier: Int) -> [String] {
         var tmp_tier_list = [String]()
-        var i = hier
-        while i >= 0 {
-            tmp_tier_list.append(Tiers_hierarchy_int_first[i]!)
-            i -= 1
+        tmp_tier_list.append(Tiers_hierarchy_int_first[hier]!)
+        if hier != 7 {
+            tmp_tier_list.append(Tiers_hierarchy_int_first[hier+1]!)
         }
         
         return tmp_tier_list
@@ -380,14 +379,19 @@ class Searching_List_Controller: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "selected_user_segue" {
+            if let destination = segue.destination as? searched_user_info {
+                if let selectedIndex = self.tableView.indexPathForSelectedRow?.row {
+                    destination.selected_user = users[selectedIndex] as mod_user
+                }
+            }
+        }
     }
-    */
+    
 
 }

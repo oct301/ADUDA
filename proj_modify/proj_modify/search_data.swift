@@ -38,3 +38,21 @@ class search_info {
         position = []
     }
 }
+
+class request {
+    var sender_:String
+    var receiver_:String
+    var status_:String
+    init(dictionary: [String: Any]) {
+        self.sender_ = dictionary["sender"] as? String ?? ""
+        self.receiver_ = dictionary["receiver"] as? String ?? ""
+        self.status_ = dictionary["status"] as? String ?? ""
+        
+    }
+    init() {
+        self.receiver_ = ""
+        self.sender_ = ""
+        self.status_ = ""
+    }
+
+}

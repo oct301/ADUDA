@@ -22,12 +22,14 @@ class mod_user {
     var Line_2:String?
     var Rank_Free:String?
     var Rank_Solo:String?
+    var introduce:String?
     init(dictionary: [String: Any]) {
         self.ID = dictionary["ID"] as? String ?? ""
         self.Line_1 = dictionary["Line_1"] as? String ?? ""
         self.Line_2 = dictionary["Line_2"] as? String ?? ""
         self.Rank_Free = dictionary["Rank_Free"] as? String ?? ""
         self.Rank_Solo = dictionary["Rank_Solo"] as? String ?? ""
+        self.introduce = dictionary["introduce"] as? String ?? ""
     }
     init() {
         self.ID = ""
@@ -35,6 +37,7 @@ class mod_user {
         self.Line_2 = ""
         self.Rank_Free = ""
         self.Rank_Solo = ""
+        self.introduce = ""
     }
 }
 

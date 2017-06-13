@@ -1,23 +1,24 @@
 //
-//  TabBarControllerViewController.swift
+//  tmp.swift
 //  proj_modify
 //
-//  Created by sujin on 2017. 6. 7..
+//  Created by sujin on 2017. 6. 13..
 //  Copyright © 2017년 sujin. All rights reserved.
 //
 
 import UIKit
 
-class TabBarControllerViewController: UITabBarController {
+class tmp: UIViewController {
 
+    @IBOutlet weak var image: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tabBar.items?[0].title = "내 정보"
-        tabBar.items?[1].title = "찾기"
-        tabBar.items?[2].title = "받은 요청"
-        tabBar.items?[3].title = "내 정보"
-
+        image.layer.borderWidth = 1
+        image.layer.masksToBounds = false
+        image.layer.borderColor = UIColor.black.cgColor
+        image.layer.cornerRadius = image.frame.height/2
+        image.clipsToBounds = true
 
         // Do any additional setup after loading the view.
     }
