@@ -279,26 +279,17 @@ class My_info_ViewController: UIViewController, UIPickerViewDataSource, UIPicker
         ref.child("users").child(user!.uid).child("Info").child("Line_1").setValue(Line_1.titleForSegment(at: Line_1.selectedSegmentIndex)!)
         ref.child("users").child(user!.uid).child("Info").child("Line_2").setValue(Line_2.titleForSegment(at: Line_2.selectedSegmentIndex)!)
 
-        //ref.child("users").child(user!.uid).child("Info").child("Line_1").setValue(Line_1.debugDescription)
-        //ref.child("users").child(user!.uid).child("Info").child("Line_2").setValue(fre_rank)
-
 
         solo_rank_label.isHidden = false
         free_rank_label.isHidden = false
 
         
         
-        // let dialog = UIAlertController(title: "생성 완료", message: nil, preferredStyle: .alert)
         let dialog = UIAlertController(title: "생성 완료", message: nil, preferredStyle: UIAlertControllerStyle.alert)
         
-        //dialog.addTextField()
-        // let okAction = UIAlertAction(title: "확인", style: .default)
         let okaction = UIAlertAction(title: "확인", style: UIAlertActionStyle.default, handler: nil)
-        //let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         dialog.addAction(okaction)
-        //dialog.addAction(cancelAction)
         
-        //self.show(dialog, sender: nil)
         self.present(dialog, animated:true, completion:nil)
         
         /* ARCHIVING

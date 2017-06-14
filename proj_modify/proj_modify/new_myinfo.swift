@@ -282,17 +282,17 @@ class new_myinfo: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate
         
 
         
-        var UserRef = rootRef.child("users").child(user!.uid).child("Info")
+        let UserRef = rootRef.child("users").child(user!.uid).child("Info")
         UserRef.observe(.value){ ( snap: FIRDataSnapshot) in
             if  snap.exists() {
                 if let dictionary = snap.value as? [String: AnyObject] {
                     let tmp = mod_user(dictionary: dictionary)
                     cur_user = tmp
                     self.non_modify_mode()
-                    cham_1 = cur_user.Champion1
-                    cham_2 = cur_user.Champion2
-                    cham_3 = cur_user.Champion3
-                    cham_4 = cur_user.Champion4
+                    self.cham_1 = cur_user.Champion1
+                    self.cham_2 = cur_user.Champion2
+                    self.cham_3 = cur_user.Champion3
+                    self.cham_4 = cur_user.Champion4
                 }
             }
             else {
@@ -501,7 +501,7 @@ class new_myinfo: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate
     }
     
     @IBAction func modify_ok(_ sender: Any) {
-        let source_name = String(userID.text!)
+        let source_name:String = String(userID.text!)
         
         //ID 안적었을 때
         if (modify_userID.text?.isEmpty)! {
@@ -513,7 +513,6 @@ class new_myinfo: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate
             return
         }
         
-        print("Aa   ", cham_2)
         if (cham_1 == nil || cham_2 == nil || cham_3 == nil || cham_4 == nil) {
             alert_window(title_: "please pick your most cham")
             return

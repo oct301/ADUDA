@@ -59,7 +59,6 @@ class Search_ViewController: UIViewController {
             info_list.position.append("원딜")
 
         }
-        //print(info_list)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

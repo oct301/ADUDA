@@ -30,9 +30,6 @@ class searched_user_info: UIViewController {
     
     
     
-    
-    
-    
     @IBOutlet weak var Cham1: UIImageView!
     @IBOutlet weak var Cham2: UIImageView!
     @IBOutlet weak var Cham3: UIImageView!
@@ -48,7 +45,6 @@ class searched_user_info: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(selected_user)
         image.layer.borderWidth = 1
         image.layer.masksToBounds = false
         image.layer.borderColor = UIColor.black.cgColor
@@ -158,8 +154,8 @@ class searched_user_info: UIViewController {
         let sender:String = cur_user.ID!
         let receiver:String = (selected_user?.ID!)!
         let status:String = "waiting"
-        var dic:Dictionary = ["sender":sender, "receiver":receiver, "status":status]
-        var reqst = request(dictionary: dic)
+        let dic:Dictionary = ["sender":sender, "receiver":receiver, "status":status]
+        let reqst = request(dictionary: dic)
         
         let ref = FIRDatabase.database().reference()
         var chk:Bool = true
@@ -187,7 +183,7 @@ class searched_user_info: UIViewController {
     @IBAction func accept_request(_ sender: Any) {
         //var dic:Dictionary = ["sender":self.selected_user?.ID, "receiver":cur_user.ID, "status":"accept"]
         FIRDatabase.database().reference().child("request").observe(.childAdded,with: { snapShot in
-            var ky = snapShot.key
+            let ky = snapShot.key
             
             if let dictionary = snapShot.value as? [String: AnyObject] {
                 //print("sender :" + sender)
@@ -196,7 +192,6 @@ class searched_user_info: UIViewController {
                 print(snapShot)
                 //print(req.sender_)
                 //print(sender)
-                print(cur_user.ID)
                 
                 if req.sender_ == self.selected_user?.ID && req.receiver_ == cur_user.ID && req.status_ == "waiting" {
                     self.alert_window(title_: "듀오가 맺어졌습니다!")
@@ -212,7 +207,7 @@ class searched_user_info: UIViewController {
     }
     @IBAction func reject_request(_ sender: Any) {
         FIRDatabase.database().reference().child("request").observe(.childAdded,with: { snapShot in
-            var ky = snapShot.key
+            let ky = snapShot.key
             
             if let dictionary = snapShot.value as? [String: AnyObject] {
                 //print("sender :" + sender)
@@ -221,7 +216,6 @@ class searched_user_info: UIViewController {
                 print(snapShot)
                 //print(req.sender_)
                 //print(sender)
-                print(cur_user.ID)
                 
                 if req.sender_ == self.selected_user?.ID && req.receiver_ == cur_user.ID && req.status_ == "waiting" {
                     self.alert_window(title_: "듀오를 거절했습니다!")

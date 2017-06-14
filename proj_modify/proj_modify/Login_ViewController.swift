@@ -28,7 +28,7 @@ class Login_ViewController: UIViewController {
     var passwordTextFieldHeightAnchor: NSLayoutConstraint?
     
     override func viewDidLoad() {
-        weak var name: UITextField!
+        //weak var name: UITextField!
         super.viewDidLoad()
         input_container.translatesAutoresizingMaskIntoConstraints = false
         name_.translatesAutoresizingMaskIntoConstraints = false

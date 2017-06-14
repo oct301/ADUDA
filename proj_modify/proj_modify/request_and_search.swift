@@ -70,7 +70,7 @@ class request_and_search: UIViewController, UITableViewDelegate, UITableViewData
         }, withCancel: nil)
         
         FIRDatabase.database().reference().child("users").observe(.childAdded, with: { (snapshot) in
-            if let dictionary = snapshot.value as? [String: AnyObject] {
+            if (snapshot.value as? [String: AnyObject]) != nil {
                 
                 //개인 auth키
                 let ky = snapshot.key
@@ -160,7 +160,7 @@ class request_and_search: UIViewController, UITableViewDelegate, UITableViewData
         var result:mod_user?
         
         FIRDatabase.database().reference().child("users").observe(.childAdded, with: { (snapshot) in
-            if let dictionary = snapshot.value as? [String: AnyObject] {
+            if (snapshot.value as? [String: AnyObject]) != nil {
                 
                 //개인 auth키
                 let ky = snapshot.key

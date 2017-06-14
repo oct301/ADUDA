@@ -17,7 +17,8 @@ class TabBarControllerViewController: UITabBarController {
         tabBar.items?[0].title = "듀오 멤버"
         tabBar.items?[1].title = "내 정보"
         tabBar.items?[2].title = "요청 확인 & 유저 찾기"
-
+        
+        self.navigationController?.navigationBar.topItem?.title = "로그인 창"
         // Do any additional setup after loading the view.
     }
 

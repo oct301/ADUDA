@@ -83,7 +83,7 @@ class Searching_List_Controller: UITableViewController {
         }
         
         FIRDatabase.database().reference().child("users").observe(.childAdded, with: { (snapshot) in
-            if let dictionary = snapshot.value as? [String: AnyObject] {
+            if (snapshot.value as? [String: AnyObject]) != nil {
                 //개인 auth키
                 let ky = snapshot.key
                 
@@ -247,10 +247,9 @@ class Searching_List_Controller: UITableViewController {
     }
     
     func fetchUser() {
-        let ref = FIRDatabase.database().reference()
         
         FIRDatabase.database().reference().child("users").observe(.childAdded, with: { (snapshot) in
-            if let dictionary = snapshot.value as? [String: AnyObject] {
+            if (snapshot.value as? [String: AnyObject]) != nil {
                 
                 //개인 auth키
                 let ky = snapshot.key
