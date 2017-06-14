@@ -327,17 +327,28 @@ class Searching_List_Controller: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath)
-            //print(users.count)
-        let temp = users[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath) as! SearchingListTableViewCell
+        cell.User_name.text = users[indexPath.row].ID!
+        
         if info_list.is_Solo == true{
-            cell.detailTextLabel?.text = "Solo " + temp.Rank_Solo!
+            cell.User_Tier_Text.text = users[indexPath.row].Rank_Solo!
+            for str in Tiers {
+                if(users[indexPath.row].Rank_Solo?.contains(str) == true){
+                    cell.User_Tier_image.image = UIImage(named: str)
+                    break
+                }
+            }
         }
         else {
-            cell.detailTextLabel?.text = "Free " + temp.Rank_Free!
+            cell.User_Tier_Text.text = users[indexPath.row].Rank_Free!
+            for str in Tiers {
+                if(users[indexPath.row].Rank_Free?.contains(str) == true){
+                    cell.User_Tier_image.image = UIImage(named: str)
+                    break
+                }
+            }
         }
-        
-        cell.textLabel?.text? = temp.ID!
+        cell.Background_image.image = UIImage(named: users[indexPath.row].Champion1!+"_0")
         return cell
 
     }
