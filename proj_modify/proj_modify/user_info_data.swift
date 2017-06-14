@@ -9,11 +9,12 @@
 import Foundation
 import Firebase
 
-var initLine1:L = L(line: "Top", cham1:"Garen", cham2:"Galio")
+/*var initLine1:L = L(line: "Top", cham1:"Garen", cham2:"Galio")
 var initLine2:L = L(line: "Jungle", cham1:"Gangplank", cham2:"Graves")
 var initUserInfo:User = User(name:"", Rank_Solo:"", Rank_Free:"", Line1:initLine1, Line2:initLine2)
 
 var myinfo = MyInfo(myInfo:initUserInfo)
+*/
 var userlist = UserList()
 
 class mod_user {
@@ -44,10 +45,10 @@ class mod_user {
         self.Rank_Free = ""
         self.Rank_Solo = ""
         self.introduce = ""
-        self.Champion1 = ""
-        self.Champion2 = ""
-        self.Champion3 = ""
-        self.Champion4 = ""
+        self.Champion1 = "Garen"
+        self.Champion2 = "Galio"
+        self.Champion3 = "Gangplank"
+        self.Champion4 = "Gragas"
         self.like = 0
         self.dislike = 0
     }
@@ -55,26 +56,26 @@ class mod_user {
 
 
 
+class UserList{
+    var givingUserInfolist:[mod_user] = []
+    var takingUserInfolist:[mod_user] = []
+    init(){
+        
+    }
+    func Addgiving(user:mod_user) {
+        givingUserInfolist += [user]
+    }
+    func Addtaking(user:mod_user) {
+        takingUserInfolist += [user]
+    }
+}
+/*
 class MyInfo {
     var myInfo:User
     init(myInfo:User) {
         self.myInfo = myInfo
     }
 }
-class UserList{
-    var givingUserInfolist:[User] = []
-    var takingUserInfolist:[User] = []
-    init(){
-        
-    }
-    func Addgiving(user:User) {
-        givingUserInfolist += [user]
-    }
-    func Addtaking(user:User) {
-        takingUserInfolist += [user]
-    }
-}
-
 class User {
     var ID:String
     var Rank_Solo_Tier:String
@@ -96,4 +97,4 @@ struct L {
     var line:String
     var cham1:String
     var cham2:String
-}
+}*/

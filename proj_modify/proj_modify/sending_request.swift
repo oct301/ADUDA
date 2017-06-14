@@ -20,7 +20,7 @@ class sending_request: UITableViewController {
 
         let ref = FIRDatabase.database().reference()
         
-        var UserRef = ref.child("users").child(user!.uid).child("Info")
+        let UserRef = ref.child("users").child(user!.uid).child("Info")
         UserRef.observe(.value){ ( snap: FIRDataSnapshot) in
             if  snap.exists() {
                 if let dictionary = snap.value as? [String: AnyObject] {

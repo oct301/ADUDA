@@ -24,6 +24,10 @@ class searched_user_info: UIViewController {
     @IBOutlet weak var line_1: UILabel!
     
     @IBOutlet weak var line_2: UILabel!
+    @IBOutlet weak var Cham1: UIImageView!
+    @IBOutlet weak var Cham2: UIImageView!
+    @IBOutlet weak var Cham3: UIImageView!
+    @IBOutlet weak var Cham4: UIImageView!
     
     var selected_user:mod_user?
     
@@ -35,7 +39,11 @@ class searched_user_info: UIViewController {
         image.layer.borderColor = UIColor.black.cgColor
         image.layer.cornerRadius = image.frame.height/2
         image.clipsToBounds = true
-        //Most_Cham_image.image = UIImage(named:  추가추가+"_0")
+        Most_Cham_image.image = UIImage(named:  (selected_user?.Champion1)!+"_0")
+        Cham1.image = UIImage(named: (selected_user?.Champion1)!)
+        Cham2.image = UIImage(named: (selected_user?.Champion2)!)
+        Cham3.image = UIImage(named: (selected_user?.Champion3)!)
+        Cham4.image = UIImage(named: (selected_user?.Champion4)!)
         //print(selected_user)
         
         username.text = selected_user?.ID
@@ -82,10 +90,10 @@ class searched_user_info: UIViewController {
     
     
     @IBAction func request_duo(_ sender: Any) {
-        var sender:String = (cur_user.ID)!
-        var receiver:String = (selected_user?.ID)!
-        var status:String = "waiting"
-        var dic:Dictionary = ["sender":sender, "receiver":receiver, "status":status]
+        let sender:String = (cur_user.ID)!
+        let receiver:String = (selected_user?.ID)!
+        let status:String = "waiting"
+        let dic:Dictionary = ["sender":sender, "receiver":receiver, "status":status]
         
         
         let ref = FIRDatabase.database().reference()

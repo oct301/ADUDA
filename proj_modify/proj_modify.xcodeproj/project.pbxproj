@@ -11,8 +11,6 @@
 		0B627A481EE40DCF004C40FA /* GivingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B627A471EE40DCF004C40FA /* GivingTableViewController.swift */; };
 		0B627A4A1EE41A7E004C40FA /* GivinguserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B627A491EE41A7E004C40FA /* GivinguserTableViewCell.swift */; };
 		0B627A891EE7E0FA004C40FA /* lol_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B627A881EE7E0FA004C40FA /* lol_logo.png */; };
-		0B627A931EE93200004C40FA /* Aatrox.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B627A921EE93200004C40FA /* Aatrox.png */; };
-		0B627A951EE93206004C40FA /* Ahri.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B627A941EE93206004C40FA /* Ahri.png */; };
 		0B627BF61EF0246A004C40FA /* ChamSelectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B627BF51EF0246A004C40FA /* ChamSelectCollectionViewCell.swift */; };
 		0B627BF81EF11BE4004C40FA /* request_and_search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B627BF71EF11BE4004C40FA /* request_and_search.swift */; };
 		0B627BFA1EF11DB3004C40FA /* SendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B627BF91EF11DB3004C40FA /* SendTableViewCell.swift */; };
@@ -45,8 +43,6 @@
 		0B627A471EE40DCF004C40FA /* GivingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GivingTableViewController.swift; sourceTree = "<group>"; };
 		0B627A491EE41A7E004C40FA /* GivinguserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GivinguserTableViewCell.swift; sourceTree = "<group>"; };
 		0B627A881EE7E0FA004C40FA /* lol_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lol_logo.png; sourceTree = SOURCE_ROOT; };
-		0B627A921EE93200004C40FA /* Aatrox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Aatrox.png; path = ../Champion_image/Aatrox.png; sourceTree = "<group>"; };
-		0B627A941EE93206004C40FA /* Ahri.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Ahri.png; path = ../Champion_image/Ahri.png; sourceTree = "<group>"; };
 		0B627BF51EF0246A004C40FA /* ChamSelectCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChamSelectCollectionViewCell.swift; sourceTree = "<group>"; };
 		0B627BF71EF11BE4004C40FA /* request_and_search.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = request_and_search.swift; sourceTree = "<group>"; };
 		0B627BF91EF11DB3004C40FA /* SendTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendTableViewCell.swift; sourceTree = "<group>"; };
@@ -115,8 +111,6 @@
 				0B627BF51EF0246A004C40FA /* ChamSelectCollectionViewCell.swift */,
 				0B627A881EE7E0FA004C40FA /* lol_logo.png */,
 				6043A2481ED6B99D00B52F0D /* AppDelegate.swift */,
-				0B627A921EE93200004C40FA /* Aatrox.png */,
-				0B627A941EE93206004C40FA /* Ahri.png */,
 				6043A24A1ED6B99D00B52F0D /* ViewController.swift */,
 				6043A24F1ED6B99D00B52F0D /* Assets.xcassets */,
 				6057C2801EECF45400964BDA /* zeddd.jpeg */,
@@ -229,10 +223,8 @@
 				0B627A891EE7E0FA004C40FA /* lol_logo.png in Resources */,
 				0B6279F51EE01DFA004C40FA /* GoogleService-Info.plist in Resources */,
 				6043A2501ED6B99D00B52F0D /* Assets.xcassets in Resources */,
-				0B627A931EE93200004C40FA /* Aatrox.png in Resources */,
 				6057C2411ED7135500964BDA /* Main.storyboard in Resources */,
 				6057C27B1EEBA43000964BDA /* zedd.jpeg in Resources */,
-				0B627A951EE93206004C40FA /* Ahri.png in Resources */,
 				6057C2811EECF45400964BDA /* zeddd.jpeg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

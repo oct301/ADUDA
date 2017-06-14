@@ -7,17 +7,17 @@
 //
 
 import UIKit
+import Firebase
 
 class TabBarControllerViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tabBar.items?[0].title = "내 정보"
-        tabBar.items?[1].title = "찾기"
-        tabBar.items?[2].title = "받은 요청"
-        tabBar.items?[3].title = "내 정보"
-
+        tabBar.items?[0].title = "듀오 멤버"
+        tabBar.items?[1].title = "내 정보"
+        tabBar.items?[2].title = "요청 확인 & 유저 찾기"
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
 
         // Do any additional setup after loading the view.
     }
@@ -27,7 +27,16 @@ class TabBarControllerViewController: UITabBarController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    func handleLogout() {
+        do {
+            try FIRAuth.auth()?.signOut()
+        } catch let logoutError {
+            print(logoutError)
+        }
+        
+        present(new_login(), animated: true, completion: nil)
+        
+    }
     /*
     // MARK: - Navigation
 
