@@ -127,8 +127,8 @@ class request_and_search: UIViewController, UITableViewDelegate, UITableViewData
         
         if tableView == SendTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "sendtablecell", for: indexPath) as! SendTableViewCell
-            /*cell.receiver.text = self.send_requests[indexPath.row].receiver_
-            //cell.Most_cham.image = UIImage(named: self.send_users[indexPath.row].Champion1! + "_0")
+            cell.receiver.text = self.send_requests[indexPath.row].receiver_
+            /*cell.Most_cham.image = UIImage(named: self.send_users[indexPath.row].Champion1! + "_0")
             //cell.intro.text = self.send_users[indexPath.row].introduce!
             
             cell.icon.layer.borderWidth = 1
@@ -252,6 +252,7 @@ class request_and_search: UIViewController, UITableViewDelegate, UITableViewData
                     let id = receive_requests[selectedIndex].sender_
                     var dest_user = mod_user()
                     for us in receive_users {
+                        print("aaaa ", receive_users)
                         if(us.ID == id){
                             dest_user = us
                             print(dest_user)
