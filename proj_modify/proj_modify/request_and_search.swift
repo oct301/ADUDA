@@ -252,7 +252,7 @@ class request_and_search: UIViewController, UITableViewDelegate, UITableViewData
                     let id = receive_requests[selectedIndex].sender_
                     var dest_user = mod_user()
                     for us in receive_users {
-                        print("aaaa ", receive_users)
+                        print("aaaa ")
                         if(us.ID == id){
                             dest_user = us
                             print(dest_user)

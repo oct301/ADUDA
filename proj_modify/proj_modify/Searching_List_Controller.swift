@@ -24,6 +24,21 @@ class Searching_List_Controller: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let user = FIRAuth.auth()?.currentUser
+        
+        let ref = FIRDatabase.database().reference()
+        
+        let UserRef = ref.child("users").child(user!.uid).child("Info")
+        UserRef.observe(.value){ ( snap: FIRDataSnapshot) in
+            if  snap.exists() {
+                if let dictionary = snap.value as? [String: AnyObject] {
+                    let tmp = mod_user(dictionary: dictionary)
+                    cur_user = tmp
+                    //print(cur_user.ID)
+                }
+            }
+        }
+        
         
        // fetchUser()
         selected_fetchUser()
@@ -50,8 +65,8 @@ class Searching_List_Controller: UITableViewController {
     func select_rank_type_3 (hier: Int) -> [String] {
         var tmp_tier_list = [String]()
         tmp_tier_list.append(Tiers_hierarchy_int_first[hier]!)
-        if hier != 7 {
-            tmp_tier_list.append(Tiers_hierarchy_int_first[hier+1]!)
+        if hier != 0 {
+            tmp_tier_list.append(Tiers_hierarchy_int_first[hier-1]!)
         }
         
         return tmp_tier_list
