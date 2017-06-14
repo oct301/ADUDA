@@ -27,6 +27,8 @@ class mod_user {
     var Champion2:String?
     var Champion3:String?
     var Champion4:String?
+    var like:Int = 0
+    var dislike:Int = 0
     init(dictionary: [String: Any]) {
         self.ID = dictionary["ID"] as? String ?? ""
         self.Line_1 = dictionary["Line_1"] as? String ?? ""
@@ -46,6 +48,8 @@ class mod_user {
         self.Champion2 = ""
         self.Champion3 = ""
         self.Champion4 = ""
+        self.like = 0
+        self.dislike = 0
     }
 }
 

@@ -46,7 +46,7 @@ class sending_request: UITableViewController {
                 }
             }
 
-                    self.tableView.reloadData()
+            self.tableView.reloadData()
      
         }, withCancel: nil)
     }

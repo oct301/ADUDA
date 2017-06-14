@@ -11,6 +11,7 @@ import Firebase
 
 class searched_user_info: UIViewController {
 
+    @IBOutlet weak var Most_Cham_image: UIImageView!
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var request_duo_outlet: UIButton!
     @IBOutlet weak var username: UILabel!
@@ -34,7 +35,7 @@ class searched_user_info: UIViewController {
         image.layer.borderColor = UIColor.black.cgColor
         image.layer.cornerRadius = image.frame.height/2
         image.clipsToBounds = true
-        
+        //Most_Cham_image.image = UIImage(named:  추가추가+"_0")
         //print(selected_user)
         
         username.text = selected_user?.ID
