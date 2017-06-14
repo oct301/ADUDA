@@ -20,7 +20,11 @@ class request_and_search: UIViewController, UITableViewDelegate, UITableViewData
     
     
     
-    var requests = [request]()
+    var send_requests = [request]()
+    var receive_requests = [request]()
+    var send_users = [mod_user]()
+    var receive_users = [mod_user]()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,14 +52,15 @@ class request_and_search: UIViewController, UITableViewDelegate, UITableViewData
     FIRDatabase.database().reference().child("request").observe(.childAdded, with: { (snapshot) in
             if let dictionary = snapshot.value as? [String: AnyObject] {
                 let req = request(dictionary: dictionary)
-                print(snapshot)
-                print(req.sender_)
-                print(cur_user.ID)
-                
+    
+                //보낸 요청
                 if(req.sender_ == cur_user.ID){
-                    self.requests.append(req)
+                    self.send_requests.append(req)
                     //print(self.users[0].ID)
                     //print(self.users.count)
+                }
+                else if(req.receiver_ == cur_user.ID){
+                    self.receive_requests.append(req)
                 }
             }
             
@@ -63,35 +68,81 @@ class request_and_search: UIViewController, UITableViewDelegate, UITableViewData
             self.ReceiveTableView.reloadData()
             
         }, withCancel: nil)
-    }
-    
-    // MARK: - Table view data source
-    func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
+        
+        FIRDatabase.database().reference().child("users").observe(.childAdded, with: { (snapshot) in
+            if let dictionary = snapshot.value as? [String: AnyObject] {
+                
+                //개인 auth키
+                let ky = snapshot.key
+                
+                FIRDatabase.database().reference().child("users").child(ky).observe(.childAdded, with: { (snapshot) in
+                    
+                    
+                    if let dictionary = snapshot.value as? [String: AnyObject] {
+                        let tmp = mod_user(dictionary: dictionary)
+                        
+                        for req in self.send_requests {
+                            if req.receiver_ == tmp.ID {
+                                self.send_users.append(tmp)
+                            }
+                        }
+                        
+                        for req in self.receive_requests {
+                            if req.sender_ == tmp.ID {
+                                self.receive_users.append(tmp)
+                            }
+                        }
+                        //self.users.append(tmp)
+                        //print(self.users[0].ID)
+                        //print(self.users.count)
+                    }
+                    
+                    //Once you created all your users, you should call tableView.reloadData()
+                }
+                    , withCancel: nil)
+                
+                //this will crash because of background thread, so lets use dispatch_async to fix
+            }
+            
+        } , withCancel: nil)
+
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return requests.count
+        var count:Int?
+        
+        if tableView == self.SendTableView {
+            count = self.send_requests.count
+        }
+        
+        if tableView == self.ReceiveTableView {
+            count =  self.receive_requests.count
+        }
+        
+        return count!
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        var cell:UITableViewCell?
+        
         if tableView == SendTableView {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "sendtablecell", for: indexPath) as! SendTableViewCell
+            cell = tableView.dequeueReusableCell(withIdentifier: "sendtablecell", for: indexPath)
             //let temp = requests[indexPath.row]
         
-            cell.receiver.text = requests[indexPath.row].receiver_
-            return cell
+            cell?.textLabel?.text = self.send_requests[indexPath.row].receiver_
+           
         }
         else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "receivetablecell", for: indexPath) as! ReceiveTableViewCell
+            cell = tableView.dequeueReusableCell(withIdentifier: "receivetablecell", for: indexPath)
             //let temp = requests[indexPath.row]
             
-            cell.sender.text = requests[indexPath.row].sender_
-            return cell
+             cell?.textLabel?.text = self.receive_requests[indexPath.row].sender_
+      
         }
+        
+        return cell!
     }
     /*func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if tableView == SendTableView {
@@ -101,14 +152,90 @@ class request_and_search: UIViewController, UITableViewDelegate, UITableViewData
             return "받은 요청"
         }
     }*/
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    func find_as_id (name: String, completion: @escaping (mod_user) -> ()) {
+        var result:mod_user?
+        
+        FIRDatabase.database().reference().child("users").observe(.childAdded, with: { (snapshot) in
+            if let dictionary = snapshot.value as? [String: AnyObject] {
+                
+                //개인 auth키
+                let ky = snapshot.key
+                
+                FIRDatabase.database().reference().child("users").child(ky).observe(.childAdded, with: { (snapshot) in
+                    
+                    /*
+                     for childSnap in  snapshot.children.allObjects {
+                     let snap = childSnap as! FIRDataSnapshot
+                     print(snap.key) // 제대로 동작
+                     }
+                     */
+                    print("Abb")
+                    print(name)
 
+                    if let dictionary = snapshot.value as? [String: AnyObject] {
+                        print("Aab")
+
+                        let tmp = mod_user(dictionary: dictionary)
+                       
+
+                            if tmp.ID == name {
+                               
+                                result = tmp
+                                completion(result!)
+                            }
+                    }
+                }
+                    , withCancel: nil)
+            }
+            
+        } , withCancel: nil)
+
+        
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "sending_user_segue" {
+            //print("users cnt: ", users.count)
+            if let destination = segue.destination as? searched_user_info {
+                //print("a")
+                if let selectedIndex = self.SendTableView.indexPathForSelectedRow?.row {
+                    let id = send_requests[selectedIndex].receiver_
+                    var dest_user = mod_user()
+                    for us in send_users {
+                        if(us.ID == id){
+                            dest_user = us
+                            print(dest_user)
+                        }
+                    }
+                    destination.selected_user = dest_user as mod_user
+                    destination.display_type = 2
+                }
+            }
+        }
+        if segue.identifier == "received_user_segue" {
+            //print("users cnt: ", users.count)
+            if let destination = segue.destination as? searched_user_info {
+                //print("a")
+                if let selectedIndex = self.ReceiveTableView.indexPathForSelectedRow?.row {
+                    let id = receive_requests[selectedIndex].sender_
+                    var dest_user = mod_user()
+                    for us in receive_users {
+                        if(us.ID == id){
+                            dest_user = us
+                            print(dest_user)
+
+                        }
+                    }
+                    destination.selected_user = dest_user as mod_user
+                    destination.display_type = 1
+                }
+            }
+        }
+        
+    }
 }

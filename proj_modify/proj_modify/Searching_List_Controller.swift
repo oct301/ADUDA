@@ -388,6 +388,7 @@ class Searching_List_Controller: UITableViewController {
             if let destination = segue.destination as? searched_user_info {
                 if let selectedIndex = self.tableView.indexPathForSelectedRow?.row {
                     destination.selected_user = users[selectedIndex] as mod_user
+                    destination.display_type = 1
                 }
             }
         }

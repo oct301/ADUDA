@@ -185,6 +185,9 @@ class new_myinfo: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate
         
         modify_introduce.text = cur_user.introduce
         
+        
+        
+        
     }
     
     func non_modify_mode() {
@@ -495,6 +498,12 @@ class new_myinfo: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate
         }
         if (modify_introduce.text?.isEmpty)! {
             alert_window(title_: "enter your introduce")
+            return
+        }
+        
+        print("Aa   ", cham_2)
+        if (cham_1 == nil || cham_2 == nil || cham_3 == nil || cham_4 == nil) {
+            alert_window(title_: "please pick your most cham")
             return
         }
         

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="WMr-lD-thA">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="WMr-lD-thA">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -1018,6 +1018,28 @@
                                     <action selector="request_duo:" destination="Af1-ZQ-cb3" eventType="touchUpInside" id="9ae-dI-A63"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9oo-V0-ckb">
+                                <rect key="frame" x="289" y="224" width="70" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.17609855760000001" green="0.6308214835" blue="0.72658253210000001" alpha="0.71427801719999995" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="듀오 거절">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="reject_request:" destination="Af1-ZQ-cb3" eventType="touchUpInside" id="vwu-2b-ssU"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vd6-Pr-igf">
+                                <rect key="frame" x="211" y="224" width="70" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.17609855760000001" green="0.6308214835" blue="0.72658253210000001" alpha="0.71427801719999995" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="듀오 수락">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="accept_request:" destination="Af1-ZQ-cb3" eventType="touchUpInside" id="sI7-rY-VP2"/>
+                                </connections>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Username" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ryw-IL-9Z7">
                                 <rect key="frame" x="0.0" y="269" width="135" height="26"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1025,6 +1047,17 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3gT-Kp-K9X">
+                                <rect key="frame" x="289" y="224" width="70" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.17609855760000001" green="0.6308214835" blue="0.72658253210000001" alpha="0.71427801719999995" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="요청  취소">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancel_request:" destination="Af1-ZQ-cb3" eventType="touchUpInside" id="jeh-Nj-O3P"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -1034,12 +1067,15 @@
                         <outlet property="Cham3" destination="Tzn-tf-cIm" id="Oxb-xk-TtO"/>
                         <outlet property="Cham4" destination="3Xt-AX-I9h" id="zhf-bW-kIb"/>
                         <outlet property="Most_Cham_image" destination="K6P-6G-usr" id="Lwj-mo-6b6"/>
+                        <outlet property="accept_request_outlet" destination="Vd6-Pr-igf" id="dHa-qN-OYK"/>
+                        <outlet property="cancel_request_outlet" destination="3gT-Kp-K9X" id="s8w-OZ-a4X"/>
                         <outlet property="free_rank" destination="9dS-sn-zjk" id="Epm-MV-8jt"/>
                         <outlet property="free_rank_image" destination="rSm-Tc-QNO" id="XbS-Fy-BkD"/>
                         <outlet property="image" destination="ptq-nz-992" id="xsh-6W-ziU"/>
                         <outlet property="introduce" destination="VAa-SE-jK3" id="Ji9-aA-f25"/>
                         <outlet property="line_1" destination="e3b-PG-yfI" id="sZa-zo-9Ga"/>
                         <outlet property="line_2" destination="fhs-KB-qrJ" id="8gF-QD-kB0"/>
+                        <outlet property="reject_request_outlet" destination="9oo-V0-ckb" id="Yqc-0O-qHq"/>
                         <outlet property="request_duo_outlet" destination="dfb-SC-UZl" id="oXF-uY-Hlm"/>
                         <outlet property="solo_rank" destination="YRQ-8Y-2Xg" id="Eau-nq-eBB"/>
                         <outlet property="solo_rank_image" destination="zIw-wh-NyQ" id="gj2-5y-2M4"/>
@@ -1091,7 +1127,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="sendtablecell" id="JjS-Lc-Bim" customClass="SendTableViewCell" customModule="proj_modify" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="sendtablecell" id="JjS-Lc-Bim" customClass="sending_user_cell">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JjS-Lc-Bim" id="dwI-AZ-EVj">
@@ -1108,7 +1144,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="receiver" destination="0aZ-ai-Awv" id="bZZ-7G-88I"/>
+                                            <segue destination="Af1-ZQ-cb3" kind="show" identifier="sending_user_segue" id="Iat-5x-sFK"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1125,7 +1161,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="receivetablecell" id="27G-Um-5A4" customClass="ReceiveTableViewCell" customModule="proj_modify" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="receivetablecell" id="27G-Um-5A4" customClass="received_user_cell">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="27G-Um-5A4" id="d6Z-yf-RG0">
@@ -1142,7 +1178,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="sender" destination="NJX-FS-XhE" id="FEc-Xb-UTH"/>
+                                            <segue destination="Af1-ZQ-cb3" kind="show" identifier="received_user_segue" id="4RT-RY-4tD"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1178,4 +1214,7 @@
         <image name="zedd.jpeg" width="600" height="900"/>
         <image name="zeddd.jpeg" width="600" height="900"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="4RT-RY-4tD"/>
+    </inferredMetricsTieBreakers>
 </document>

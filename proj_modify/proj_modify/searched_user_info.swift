@@ -24,16 +24,31 @@ class searched_user_info: UIViewController {
     @IBOutlet weak var line_1: UILabel!
     
     @IBOutlet weak var line_2: UILabel!
+    @IBOutlet weak var accept_request_outlet: UIButton!
+    @IBOutlet weak var cancel_request_outlet: UIButton!
+    @IBOutlet weak var reject_request_outlet: UIButton!
+    
+    
+    
+    
+    
+    
     @IBOutlet weak var Cham1: UIImageView!
     @IBOutlet weak var Cham2: UIImageView!
     @IBOutlet weak var Cham3: UIImageView!
     @IBOutlet weak var Cham4: UIImageView!
     
+    var req_list = [request]()
+    
     var selected_user:mod_user?
+    var display_type:Int?
+    //display_type 1: 찾기에서 보여주는 유저 (듀오 요청 버튼)
+    //             2: 보낸 요청에서 보여주는 유저 (듀오 요청 취소 버튼)
+    //             3: 받은 요청에서 보여주는 유저 (듀오 수락, 거절 버튼)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print(selected_user)
         image.layer.borderWidth = 1
         image.layer.masksToBounds = false
         image.layer.borderColor = UIColor.black.cgColor
@@ -52,6 +67,47 @@ class searched_user_info: UIViewController {
         free_rank.text = selected_user?.Rank_Free
         line_1.text = selected_user?.Line_1
         line_2.text = selected_user?.Line_2
+        
+        if(display_type == 1) {
+            request_duo_outlet.isHidden = false
+            accept_request_outlet.isHidden = true
+            reject_request_outlet.isHidden = true
+            cancel_request_outlet.isHidden = true
+        }
+        else if(display_type == 2) {
+            request_duo_outlet.isHidden = true
+            accept_request_outlet.isHidden = true
+            reject_request_outlet.isHidden = true
+            cancel_request_outlet.isHidden = false
+        }
+        if(display_type == 3) {
+            request_duo_outlet.isHidden = true
+            accept_request_outlet.isHidden = false
+            reject_request_outlet.isHidden = false
+            cancel_request_outlet.isHidden = true
+        }
+        let ref = FIRDatabase.database().reference()
+
+        let user = FIRAuth.auth()?.currentUser
+        var sender:String = ""
+
+        let UserRef = ref.child("users").child(user!.uid).child("Info")
+        UserRef.observe(.value){ ( snap: FIRDataSnapshot) in
+            if let dictionary = snap.value as? [String: AnyObject] {
+                cur_user = mod_user(dictionary: dictionary)
+                sender = cur_user.ID!
+                FIRDatabase.database().reference().child("request").observe(.childAdded, with: { (snapshot) in
+                    if let dictionary = snapshot.value as? [String: AnyObject] {
+                        let req = request(dictionary: dictionary)
+                        //print(snapshot)
+                        
+                        if(req.sender_ == sender){
+                            self.req_list.append(req)
+                        }
+                    }
+                }, withCancel: nil)
+            }
+        }
 
         
         var tmp_free_tier:String = ""
@@ -88,20 +144,78 @@ class searched_user_info: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    func alert_window(title_ : String) {
+        let dialog = UIAlertController(title: title_, message: nil, preferredStyle: UIAlertControllerStyle.alert)
+        
+        let okaction = UIAlertAction(title: "확인", style: UIAlertActionStyle.default, handler: nil)
+        
+        dialog.addAction(okaction)
+        
+        self.present(dialog, animated:true, completion:nil)
+    }
     
     @IBAction func request_duo(_ sender: Any) {
-        let sender:String = (cur_user.ID)!
-        let receiver:String = (selected_user?.ID)!
+        let sender:String = cur_user.ID!
+        let receiver:String = (selected_user?.ID!)!
         let status:String = "waiting"
-        let dic:Dictionary = ["sender":sender, "receiver":receiver, "status":status]
-        
+        var dic:Dictionary = ["sender":sender, "receiver":receiver, "status":status]
+        var reqst = request(dictionary: dic)
         
         let ref = FIRDatabase.database().reference()
-        ref.child("request").childByAutoId().setValue(dic)
-       /* ref.child("request").child("sender").setValue(sender)
-        ref.child("request").child("receiver").setValue(receiver)
-        ref.child("request").child("status").setValue(status)*/
+        var chk:Bool = true
+        // print(req_list.count)
+        for req in req_list {
+            if(req.receiver_ == receiver && status == "waiting") {
+                alert_window(title_: "이미 듀오 요청 대기중입니다.")
+                chk = false
+                break
+            }
+            if(req.receiver_ == receiver && status == "accept") {
+                alert_window(title_: "이미 당신과 듀오입니다.")
+                chk = false
+                break
+            }
+        }
+        if chk == true {
+            alert_window(title_: "듀오를 요청했습니다!")
+            req_list.insert(reqst, at: 0)
+            ref.child("request").childByAutoId().setValue(dic)
+            //request_duo_outlet.titleLabel?.text = "듀오 요청중"
+        }
     }
+    
+    @IBAction func accept_request(_ sender: Any) {
+        //var dic:Dictionary = ["sender":self.selected_user?.ID, "receiver":cur_user.ID, "status":"accept"]
+        FIRDatabase.database().reference().child("request").observe(.childAdded,with: { snapShot in
+            var ky = snapShot.key
+            
+            if let dictionary = snapShot.value as? [String: AnyObject] {
+                //print("sender :" + sender)
+                
+                let req = request(dictionary: dictionary)
+                print(snapShot)
+                //print(req.sender_)
+                //print(sender)
+                print(cur_user.ID)
+                
+                if req.sender_ == self.selected_user?.ID && req.receiver_ == cur_user.ID && req.status_ == "waiting" {
+                    self.alert_window(title_: "듀오가 맺어졌습니다!")
+                    FIRDatabase.database().reference().child("request").child(ky).child("status").setValue("accept")
+                    self.accept_request_outlet.isHidden = true
+                    self.reject_request_outlet.isHidden = true
+                    
+                    
+                }
+                
+            }
+        })
+    }
+    @IBAction func reject_request(_ sender: Any) {
+    }
+    @IBAction func cancel_request(_ sender: Any) {
+    }
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
