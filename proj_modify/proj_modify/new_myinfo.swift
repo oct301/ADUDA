@@ -179,6 +179,12 @@ class new_myinfo: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate
             }
         }
         
+        Button1.imageView?.image = UIImage(named: cur_user.Champion1!)
+        Button2.imageView?.image = UIImage(named: cur_user.Champion2!)
+        Button3.imageView?.image = UIImage(named: cur_user.Champion3!)
+        Button4.imageView?.image = UIImage(named: cur_user.Champion4!)
+
+        
         
         modify_userID.textAlignment = .center
         modify_userID.text = cur_user.ID
@@ -274,6 +280,8 @@ class new_myinfo: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate
         ChamCollectionView.dataSource = self
         cham_search.delegate = self
         
+
+        
         var UserRef = rootRef.child("users").child(user!.uid).child("Info")
         UserRef.observe(.value){ ( snap: FIRDataSnapshot) in
             if  snap.exists() {
@@ -281,6 +289,10 @@ class new_myinfo: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate
                     let tmp = mod_user(dictionary: dictionary)
                     cur_user = tmp
                     self.non_modify_mode()
+                    cham_1 = cur_user.Champion1
+                    cham_2 = cur_user.Champion2
+                    cham_3 = cur_user.Champion3
+                    cham_4 = cur_user.Champion4
                 }
             }
             else {
