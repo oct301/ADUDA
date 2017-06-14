@@ -37,6 +37,12 @@ class mod_user {
         self.Rank_Free = dictionary["Rank_Free"] as? String ?? ""
         self.Rank_Solo = dictionary["Rank_Solo"] as? String ?? ""
         self.introduce = dictionary["introduce"] as? String ?? ""
+        self.Champion1 = dictionary["Champion1"] as? String ?? ""
+        self.Champion2 = dictionary["Champion2"] as? String ?? ""
+        self.Champion3 = dictionary["Champion3"] as? String ?? ""
+        self.Champion4 = dictionary["Champion4"] as? String ?? ""
+
+
     }
     init() {
         self.ID = ""

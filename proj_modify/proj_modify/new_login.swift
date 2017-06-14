@@ -22,6 +22,7 @@ class new_login: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.topItem?.title = "ADUDA"
         
         name_container.isHidden = true // 이거 만으로도 텍스트까지 숨김
         

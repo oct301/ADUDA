@@ -57,6 +57,13 @@ class new_myinfo: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate
     @IBOutlet weak var Line_1: UISegmentedControl!
     @IBOutlet weak var Line_2: UISegmentedControl!
     
+    //
+    var cham_1:String?
+    var cham_2:String?
+    var cham_3:String?
+    var cham_4:String?
+    //
+    
     
     
     @IBOutlet weak var modify_button_outlet: UIButton!
@@ -209,6 +216,13 @@ class new_myinfo: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate
         
         Line_1_label.text = cur_user.Line_1
         Line_2_label.text = cur_user.Line_2
+        
+        ChamImage1.image = UIImage(named:cur_user.Champion1!)
+        ChamImage2.image = UIImage(named:cur_user.Champion2!)
+        ChamImage3.image = UIImage(named:cur_user.Champion3!)
+        ChamImage4.image = UIImage(named:cur_user.Champion4!)
+
+
 
         
         var tmp_free_tier:String = ""
@@ -305,11 +319,13 @@ class new_myinfo: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate
         if cham_num == 1 {
             if issearch == true {
                 cur_user.Champion1 = filter[indexPath.row]
+                cham_1 = filter[indexPath.row]
                 Button1.imageView?.image = UIImage(named: filter[indexPath.row])
                 ChamImage1.image = UIImage(named: filter[indexPath.row])
             }
             else {
                 cur_user.Champion1 = nameList[indexPath.row]
+                cham_1 = nameList[indexPath.row]
                 Button1.imageView?.image = UIImage(named: nameList[indexPath.row])
                 ChamImage1.image = UIImage(named: nameList[indexPath.row])
             }
@@ -317,11 +333,14 @@ class new_myinfo: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate
         else if cham_num == 2 {
             if issearch == true {
                 cur_user.Champion2 = filter[indexPath.row]
+                cham_2 = filter[indexPath.row]
                 Button2.imageView?.image = UIImage(named: filter[indexPath.row])
                 ChamImage2.image = UIImage(named: filter[indexPath.row])
             }
             else {
                 cur_user.Champion2 = nameList[indexPath.row]
+                cham_2 = nameList[indexPath.row]
+
                 Button2.imageView?.image = UIImage(named: nameList[indexPath.row])
                 ChamImage2.image = UIImage(named: nameList[indexPath.row])
             }
@@ -329,11 +348,15 @@ class new_myinfo: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate
         else if cham_num == 3 {
             if issearch == true {
                 cur_user.Champion3 = filter[indexPath.row]
+                cham_3 = filter[indexPath.row]
+
                 Button3.imageView?.image = UIImage(named: filter[indexPath.row])
                 ChamImage3.image = UIImage(named: filter[indexPath.row])
             }
             else {
                 cur_user.Champion3 = nameList[indexPath.row]
+                cham_3 = nameList[indexPath.row]
+
                 Button3.imageView?.image = UIImage(named: nameList[indexPath.row])
                 ChamImage3.image = UIImage(named: nameList[indexPath.row])
             }
@@ -341,11 +364,15 @@ class new_myinfo: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate
         else {
             if issearch == true {
                 cur_user.Champion4 = filter[indexPath.row]
+                cham_4 = filter[indexPath.row]
+
                 Button4.imageView?.image = UIImage(named: filter[indexPath.row])
                 ChamImage4.image = UIImage(named: filter[indexPath.row])
             }
             else {
                 cur_user.Champion4 = nameList[indexPath.row]
+                cham_4 = nameList[indexPath.row]
+
                 Button4.imageView?.image = UIImage(named: nameList[indexPath.row])
                 ChamImage4.image = UIImage(named: nameList[indexPath.row])
             }
@@ -482,9 +509,16 @@ class new_myinfo: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate
             is_initial = false
 
         
+        
         //선호라인 데아터베이스 업데이트
         ref.child("users").child(user!.uid).child("Info").child("Line_1").setValue(Line_1.titleForSegment(at: Line_1.selectedSegmentIndex)!)
         ref.child("users").child(user!.uid).child("Info").child("Line_2").setValue(Line_2.titleForSegment(at: Line_2.selectedSegmentIndex)!)
+        ref.child("users").child(user!.uid).child("Info").child("Champion1").setValue(cham_1)
+        ref.child("users").child(user!.uid).child("Info").child("Champion2").setValue(cham_2)
+        ref.child("users").child(user!.uid).child("Info").child("Champion3").setValue(cham_3)
+        ref.child("users").child(user!.uid).child("Info").child("Champion4").setValue(cham_4)
+
+        
         
         ref.child("users").child(user!.uid).child("Info").child("introduce").setValue(modify_introduce.text)
         
