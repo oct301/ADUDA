@@ -36,12 +36,50 @@ class searched_user_info: UIViewController {
     @IBOutlet weak var Cham4: UIImageView!
     
     var req_list = [request]()
+    var friend:String?
     
     var selected_user:mod_user?
     var display_type:Int?
     //display_type 1: 찾기에서 보여주는 유저 (듀오 요청 버튼)
     //             2: 보낸 요청에서 보여주는 유저 (듀오 요청 취소 버튼)
     //             3: 받은 요청에서 보여주는 유저 (듀오 수락, 거절 버튼)
+    //             4: 친구목록에서 친구 이름만 가져옴.
+    
+    func friend_search(completion: @escaping (mod_user) -> ()) {
+        FIRDatabase.database().reference().child("users").observe(.childAdded, with: { (snapshot) in
+            if (snapshot.value as? [String: AnyObject]) != nil {
+                
+                //개인 auth키
+                let ky = snapshot.key
+                
+                FIRDatabase.database().reference().child("users").child(ky).observe(.childAdded, with: { (snapshot) in
+                    
+                    
+                    if let dictionary = snapshot.value as? [String: AnyObject] {
+                        let tmp = mod_user(dictionary: dictionary)
+                        
+                        print(self.friend)
+                        print(tmp.ID)
+                        if tmp.ID == self.friend {
+                          
+                            completion(tmp)
+                        }
+                        //self.users.append(tmp)
+                        //print(self.users[0].ID)
+                        //print(self.users.count)
+                    }
+                    
+                    //Once you created all your users, you should call tableView.reloadData()
+                }
+                    , withCancel: nil)
+                
+                //this will crash because of background thread, so lets use dispatch_async to fix
+            }
+            
+        } , withCancel: nil)
+
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,6 +88,81 @@ class searched_user_info: UIViewController {
         image.layer.borderColor = UIColor.black.cgColor
         image.layer.cornerRadius = image.frame.height/2
         image.clipsToBounds = true
+        
+        var myGroup = DispatchGroup()
+        
+        myGroup.enter()
+
+        
+        if(display_type == 1) {
+            request_duo_outlet.isHidden = false
+            accept_request_outlet.isHidden = true
+            reject_request_outlet.isHidden = true
+            cancel_request_outlet.isHidden = true
+        }
+        else if(display_type == 2) {
+            request_duo_outlet.isHidden = true
+            accept_request_outlet.isHidden = true
+            reject_request_outlet.isHidden = true
+            cancel_request_outlet.isHidden = false
+        }
+        else if(display_type == 3) {
+            request_duo_outlet.isHidden = true
+            accept_request_outlet.isHidden = false
+            reject_request_outlet.isHidden = false
+            cancel_request_outlet.isHidden = true
+        }
+        else if display_type == 4 {
+            request_duo_outlet.isHidden = true
+            accept_request_outlet.isHidden = true
+            reject_request_outlet.isHidden = true
+            cancel_request_outlet.isHidden = true
+            print(friend)
+            print("Dd")
+            
+            friend_search(completion: { result in
+                print("result: ", result)
+                self.selected_user = result
+            })
+            /*FIRDatabase.database().reference().child("users").observe(.childAdded, with: { (snapshot) in
+                if (snapshot.value as? [String: AnyObject]) != nil {
+                    
+                    //개인 auth키
+                    let ky = snapshot.key
+                    
+                    FIRDatabase.database().reference().child("users").child(ky).observe(.childAdded, with: { (snapshot) in
+                        
+                        
+                        if let dictionary = snapshot.value as? [String: AnyObject] {
+                            let tmp = mod_user(dictionary: dictionary)
+                            
+                            print(self.friend)
+                            print(tmp.ID)
+                            if tmp.ID == self.friend {
+                                print("LOOP: ", self.friend)
+                                print("TMP: " ,tmp.ID)
+                                self.selected_user = tmp
+                                myGroup.leave()
+                                return
+                            }
+                            //self.users.append(tmp)
+                            //print(self.users[0].ID)
+                            //print(self.users.count)
+                        }
+                        
+                        //Once you created all your users, you should call tableView.reloadData()
+                    }
+                        , withCancel: nil)
+                    
+                    //this will crash because of background thread, so lets use dispatch_async to fix
+                }
+                
+            } , withCancel: nil)*/
+        }
+        
+        
+        
+        print(selected_user)
         Most_Cham_image.image = UIImage(named:  (selected_user?.Champion1)!+"_0")
         Cham1.image = UIImage(named: (selected_user?.Champion1)!)
         Cham2.image = UIImage(named: (selected_user?.Champion2)!)
@@ -64,26 +177,8 @@ class searched_user_info: UIViewController {
         line_1.text = selected_user?.Line_1
         line_2.text = selected_user?.Line_2
         
-        if(display_type == 1) {
-            request_duo_outlet.isHidden = false
-            accept_request_outlet.isHidden = true
-            reject_request_outlet.isHidden = true
-            cancel_request_outlet.isHidden = true
-        }
-        else if(display_type == 2) {
-            request_duo_outlet.isHidden = true
-            accept_request_outlet.isHidden = true
-            reject_request_outlet.isHidden = true
-            cancel_request_outlet.isHidden = false
-        }
-        if(display_type == 3) {
-            request_duo_outlet.isHidden = true
-            accept_request_outlet.isHidden = false
-            reject_request_outlet.isHidden = false
-            cancel_request_outlet.isHidden = true
-        }
         let ref = FIRDatabase.database().reference()
-
+        
         let user = FIRAuth.auth()?.currentUser
         var sender:String = ""
 

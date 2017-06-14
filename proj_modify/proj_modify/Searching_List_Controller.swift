@@ -343,7 +343,16 @@ class Searching_List_Controller: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath) as! SearchingListTableViewCell
+        
+        cell.plus_pic.layer.borderWidth = 1
+        cell.plus_pic.layer.masksToBounds = false
+        cell.plus_pic.layer.borderColor = UIColor.black.cgColor
+        cell.plus_pic.layer.cornerRadius = cell.plus_pic.frame.height/2
+        cell.plus_pic.clipsToBounds = true
+
+        
         cell.User_name.text = users[indexPath.row].ID!
+        cell.background.image = UIImage(named: users[indexPath.row].Champion1!+"_0")
         
         cell.User_Tier_Text.text = users[indexPath.row].Rank_Solo!
         for str in Tiers {

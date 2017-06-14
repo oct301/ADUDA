@@ -10,6 +10,8 @@ import UIKit
 
 class SearchingListTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var plus_pic: UIView!
+    @IBOutlet weak var background: UIImageView!
     @IBOutlet weak var User_name: UILabel!
     @IBOutlet weak var User_Tier_image: UIImageView!
     @IBOutlet weak var User_Tier_Text: UILabel!

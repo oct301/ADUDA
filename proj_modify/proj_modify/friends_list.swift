@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 
 var friends = [String]()
+var friends_ = [mod_user]()
 
 class friends_list: UITableViewController {
     
@@ -51,6 +52,39 @@ class friends_list: UITableViewController {
            self.tableView.reloadData()
             
         }, withCancel: nil)
+        FIRDatabase.database().reference().child("users").observe(.childAdded, with: { (snapshot) in
+            if (snapshot.value as? [String: AnyObject]) != nil {
+                
+                //개인 auth키
+                let ky = snapshot.key
+                
+                FIRDatabase.database().reference().child("users").child(ky).observe(.childAdded, with: { (snapshot) in
+                    
+                    
+                    if let dictionary = snapshot.value as? [String: AnyObject] {
+                        let tmp = mod_user(dictionary: dictionary)
+                        
+                        for fri in friends {
+                            if fri == tmp.ID {
+                                friends_.append(tmp)
+                            }
+                        }
+                        
+                        //self.users.append(tmp)
+                        //print(self.users[0].ID)
+                        //print(self.users.count)
+                    }
+                    
+                    //Once you created all your users, you should call  
+                   self.tableView.reloadData()
+                }
+                    
+                    , withCancel: nil)
+                
+                //this will crash because of background thread, so lets use dispatch_async to fix
+            }
+            
+        } , withCancel: nil)
 
         
 
@@ -74,15 +108,42 @@ class friends_list: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //print("num: ", friends.count)
+        print("num: ", friends_.count)
         // #warning Incomplete implementation, return the number of rows
-        return friends.count
+        return friends_.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "friends_cell", for: indexPath)
-        cell.textLabel?.text = friends[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "friend_cell", for: indexPath) as! SearchingListTableViewCell
+        
+        
+        cell.User_name.text = friends_[indexPath.row].ID!
+        cell.background.image = UIImage(named: friends_[indexPath.row].Champion1!+"_0")
+        
+        cell.User_Tier_Text.text = friends_[indexPath.row].Rank_Solo!
+        for str in Tiers {
+            if(friends_[indexPath.row].Rank_Solo?.contains(str) == true){
+                cell.User_Tier_image.image = UIImage(named: str)
+                break
+            }
+        }
+        cell.User_Tier_Text2.text = friends_[indexPath.row].Rank_Free!
+        for str in Tiers {
+            if(friends_[indexPath.row].Rank_Free?.contains(str) == true){
+                cell.User_Tier_image2.image = UIImage(named: str)
+                break
+            }
+        }
+        
+        cell.icon.layer.borderWidth = 1
+        cell.icon.layer.masksToBounds = false
+        cell.icon.layer.borderColor = UIColor.black.cgColor
+        cell.icon.layer.cornerRadius = cell.icon.frame.height/2
+        cell.icon.clipsToBounds = true
+        cell.icon.image = UIImage(named: friends_[indexPath.row].Champion1!)
+        //cell.User_intro.text = users[indexPath.row].Line_1! + " " + users[indexPath.row].Line_2!
+        return cell
         
         // Configure the cell...
 
@@ -125,14 +186,28 @@ class friends_list: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if let destination = segue.destination as? searched_user_info {
+            //print("a")
+            if let selectedIndex = self.tableView.indexPathForSelectedRow?.row {
+                /*let id = friends[selectedIndex]
+                var dest_user = mod_user()
+                for us in friends_ {
+                    if(us.ID == id){
+                        dest_user = us
+                        print(dest_user)
+                    }
+                }*/
+                destination.friend = friends[selectedIndex]
+                destination.selected_user = friends_[selectedIndex]
+                destination.display_type = 4
+            }
+        }
     }
-    */
+    
 
 }
