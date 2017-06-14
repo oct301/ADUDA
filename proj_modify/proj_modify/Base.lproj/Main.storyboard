@@ -826,7 +826,7 @@
                     <connections>
                         <segue destination="01T-CI-tgg" kind="relationship" relationship="viewControllers" id="aaY-R8-uGT"/>
                         <segue destination="SgO-if-Cem" kind="relationship" relationship="viewControllers" id="KKB-o2-35V"/>
-                        <segue destination="N4D-iG-i86" kind="relationship" relationship="viewControllers" id="eKF-Mt-21U"/>
+                        <segue destination="oZW-Vm-meA" kind="relationship" relationship="viewControllers" id="RDn-po-Jya"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ma2-sq-AaT" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1080,6 +1080,7 @@
                         <outlet property="solo_rank" destination="YRQ-8Y-2Xg" id="Eau-nq-eBB"/>
                         <outlet property="solo_rank_image" destination="zIw-wh-NyQ" id="gj2-5y-2M4"/>
                         <outlet property="username" destination="ryw-IL-9Z7" id="Soe-hy-t7I"/>
+                        <segue destination="oZW-Vm-meA" kind="show" identifier="reject_sync" id="wv2-mt-GA9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dml-LE-eMG" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1087,26 +1088,9 @@
             <point key="canvasLocation" x="1845.5999999999999" y="3720.9895052473767"/>
         </scene>
         <!--Item-->
-        <scene sceneID="r51-vR-Y01">
-            <objects>
-                <navigationController id="N4D-iG-i86" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="XvM-uv-dde"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="F37-rD-20h">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="oZW-Vm-meA" kind="relationship" relationship="rootViewController" id="Etj-lD-Ypx"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4da-QE-kZ3" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="775" y="2678"/>
-        </scene>
-        <!--Request and search-->
         <scene sceneID="4Oh-k4-KGa">
             <objects>
-                <viewController id="oZW-Vm-meA" customClass="request_and_search" customModule="proj_modify" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="request" id="oZW-Vm-meA" customClass="request_and_search" customModule="proj_modify" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ehd-Yu-LCU"/>
                         <viewControllerLayoutGuide type="bottom" id="Z6s-SQ-LN4"/>
@@ -1134,7 +1118,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0aZ-ai-Awv">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0aZ-ai-Awv">
                                                     <rect key="frame" x="16" y="11" width="109" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -1168,7 +1152,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NJX-FS-XhE">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NJX-FS-XhE">
                                                     <rect key="frame" x="23" y="11" width="99" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -1186,6 +1170,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="PTB-cu-QnC"/>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="x94-4r-Csl"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
@@ -1216,5 +1201,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="4RT-RY-4tD"/>
+        <segue reference="wv2-mt-GA9"/>
     </inferredMetricsTieBreakers>
 </document>

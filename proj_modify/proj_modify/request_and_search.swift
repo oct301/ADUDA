@@ -54,12 +54,12 @@ class request_and_search: UIViewController, UITableViewDelegate, UITableViewData
                 let req = request(dictionary: dictionary)
     
                 //보낸 요청
-                if(req.sender_ == cur_user.ID){
+                if(req.sender_ == cur_user.ID && req.status_ == "waiting"){
                     self.send_requests.append(req)
                     //print(self.users[0].ID)
                     //print(self.users.count)
                 }
-                else if(req.receiver_ == cur_user.ID){
+                else if(req.receiver_ == cur_user.ID && req.status_ == "waiting"){
                     self.receive_requests.append(req)
                 }
             }
@@ -232,10 +232,11 @@ class request_and_search: UIViewController, UITableViewDelegate, UITableViewData
                         }
                     }
                     destination.selected_user = dest_user as mod_user
-                    destination.display_type = 1
+                    destination.display_type = 3
                 }
             }
         }
-        
+        self.SendTableView.reloadData()
+        self.ReceiveTableView.reloadData()
     }
 }

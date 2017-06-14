@@ -211,6 +211,31 @@ class searched_user_info: UIViewController {
         })
     }
     @IBAction func reject_request(_ sender: Any) {
+        FIRDatabase.database().reference().child("request").observe(.childAdded,with: { snapShot in
+            var ky = snapShot.key
+            
+            if let dictionary = snapShot.value as? [String: AnyObject] {
+                //print("sender :" + sender)
+                
+                let req = request(dictionary: dictionary)
+                print(snapShot)
+                //print(req.sender_)
+                //print(sender)
+                print(cur_user.ID)
+                
+                if req.sender_ == self.selected_user?.ID && req.receiver_ == cur_user.ID && req.status_ == "waiting" {
+                    self.alert_window(title_: "듀오를 거절했습니다!")
+                    FIRDatabase.database().reference().child("request").child(ky).child("status").setValue("reject")
+                    FIRDatabase.database().reference().child("request").child(ky).removeValue()
+                    //self.performSegue(withIdentifier: "reject_segue", sender: nil)
+                   /* DispatchQueue.main.async {
+                        self.performSegue(withIdentifier: "reject_sync",sender: self)
+                    }*/
+
+                }
+                
+            }
+        })
     }
     @IBAction func cancel_request(_ sender: Any) {
     }
