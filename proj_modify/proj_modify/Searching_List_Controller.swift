@@ -345,25 +345,20 @@ class Searching_List_Controller: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath) as! SearchingListTableViewCell
         cell.User_name.text = users[indexPath.row].ID!
         
-        if info_list.is_Solo == true{
-            cell.User_Tier_Text.text = users[indexPath.row].Rank_Solo!
-            for str in Tiers {
-                if(users[indexPath.row].Rank_Solo?.contains(str) == true){
-                    cell.User_Tier_image.image = UIImage(named: str)
-                    break
-                }
+        cell.User_Tier_Text.text = users[indexPath.row].Rank_Solo!
+        for str in Tiers {
+            if(users[indexPath.row].Rank_Solo?.contains(str) == true){
+                cell.User_Tier_image.image = UIImage(named: str)
+                break
             }
         }
-        else {
-            cell.User_Tier_Text.text = users[indexPath.row].Rank_Free!
-            for str in Tiers {
+        cell.User_Tier_Text2.text = users[indexPath.row].Rank_Free!
+        for str in Tiers {
                 if(users[indexPath.row].Rank_Free?.contains(str) == true){
-                    cell.User_Tier_image.image = UIImage(named: str)
-                    break
-                }
+                cell.User_Tier_image2.image = UIImage(named: str)
+                break
             }
         }
-        cell.Background_image.image = UIImage(named: users[indexPath.row].Champion1!+"_0")
         cell.User_intro.text = users[indexPath.row].introduce
         
         cell.icon.layer.borderWidth = 1
@@ -371,6 +366,7 @@ class Searching_List_Controller: UITableViewController {
         cell.icon.layer.borderColor = UIColor.black.cgColor
         cell.icon.layer.cornerRadius = cell.icon.frame.height/2
         cell.icon.clipsToBounds = true
+        cell.icon.image = UIImage(named: users[indexPath.row].Champion1!)
         //cell.User_intro.text = users[indexPath.row].Line_1! + " " + users[indexPath.row].Line_2!
         return cell
 
