@@ -125,24 +125,51 @@ class request_and_search: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        var cell:UITableViewCell?
-        
         if tableView == SendTableView {
-            cell = tableView.dequeueReusableCell(withIdentifier: "sendtablecell", for: indexPath)
-            //let temp = requests[indexPath.row]
-        
-            cell?.textLabel?.text = self.send_requests[indexPath.row].receiver_
+            let cell = tableView.dequeueReusableCell(withIdentifier: "sendtablecell", for: indexPath) as! SendTableViewCell
+            /*cell.receiver.text = self.send_requests[indexPath.row].receiver_
+            //cell.Most_cham.image = UIImage(named: self.send_users[indexPath.row].Champion1! + "_0")
+            //cell.intro.text = self.send_users[indexPath.row].introduce!
+            
+            cell.icon.layer.borderWidth = 1
+            cell.icon.layer.masksToBounds = false
+            cell.icon.layer.borderColor = UIColor.black.cgColor
+            cell.icon.layer.cornerRadius = cell.icon.frame.height/2
+            cell.icon.clipsToBounds = true
+            
+            cell.Tier_text.text = self.send_users[indexPath.row].Rank_Solo
+            for str in Tiers {
+                if(self.send_users[indexPath.row].Rank_Solo!.contains(str) == true){
+                    cell.Tier_image.image = UIImage(named: str)
+                    break
+                }
+            }*/
+            return cell
            
         }
         else {
-            cell = tableView.dequeueReusableCell(withIdentifier: "receivetablecell", for: indexPath)
-            //let temp = requests[indexPath.row]
+            let cell = tableView.dequeueReusableCell(withIdentifier: "receivetablecell", for: indexPath) as! ReceiveTableViewCell
             
-             cell?.textLabel?.text = self.receive_requests[indexPath.row].sender_
-      
+            cell.sender.text = self.receive_requests[indexPath.row].sender_
+            //cell.Most_cham.image = UIImage(named: self.receive_users[indexPath.row].Champion1! + "_0")
+            //cell.intro.text = self.receive_users[indexPath.row].introduce!
+            
+            /*cell.icon.layer.borderWidth = 1
+            cell.icon.layer.masksToBounds = false
+            cell.icon.layer.borderColor = UIColor.black.cgColor
+            cell.icon.layer.cornerRadius = cell.icon.frame.height/2
+            cell.icon.clipsToBounds = true
+            
+            cell.Tier_text.text = self.receive_users[indexPath.row].Rank_Solo
+            for str in Tiers {
+                if(self.receive_users[indexPath.row].Rank_Solo!.contains(str) == true){
+                    cell.Tier_image.image = UIImage(named: str)
+                    break
+                }
+            }*/
+            return cell
         }
         
-        return cell!
     }
     /*func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if tableView == SendTableView {

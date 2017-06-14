@@ -11,6 +11,11 @@ import UIKit
 class ReceiveTableViewCell: UITableViewCell {
 
     @IBOutlet weak var sender: UILabel!
+    @IBOutlet weak var icon: UIImageView!
+    @IBOutlet weak var intro: UILabel!
+    @IBOutlet weak var Tier_image: UIImageView!
+    @IBOutlet weak var Tier_text: UILabel!
+    @IBOutlet weak var Most_cham: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

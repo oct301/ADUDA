@@ -14,6 +14,8 @@ class SearchingListTableViewCell: UITableViewCell {
     @IBOutlet weak var User_Tier_image: UIImageView!
     @IBOutlet weak var User_Tier_Text: UILabel!
     @IBOutlet weak var Background_image: UIImageView!
+    @IBOutlet weak var User_intro: UILabel!
+    @IBOutlet weak var icon: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

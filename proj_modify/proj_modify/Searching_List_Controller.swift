@@ -349,6 +349,14 @@ class Searching_List_Controller: UITableViewController {
             }
         }
         cell.Background_image.image = UIImage(named: users[indexPath.row].Champion1!+"_0")
+        cell.User_intro.text = users[indexPath.row].introduce
+        
+        cell.icon.layer.borderWidth = 1
+        cell.icon.layer.masksToBounds = false
+        cell.icon.layer.borderColor = UIColor.black.cgColor
+        cell.icon.layer.cornerRadius = cell.icon.frame.height/2
+        cell.icon.clipsToBounds = true
+        //cell.User_intro.text = users[indexPath.row].Line_1! + " " + users[indexPath.row].Line_2!
         return cell
 
     }
