@@ -48,6 +48,8 @@ class request_and_search: UIViewController, UITableViewDelegate, UITableViewData
                         //self.users.append(tmp)
                         //print(self.users[0].ID)
                         //print(self.users.count)
+                        self.SendTableView.reloadData()
+                        self.ReceiveTableView.reloadData()
                     }
                     
                     //Once you created all your users, you should call tableView.reloadData()
@@ -56,8 +58,6 @@ class request_and_search: UIViewController, UITableViewDelegate, UITableViewData
                 //this will crash because of background thread, so lets use dispatch_async to fix
             }
         }, withCancel: nil)
-        self.SendTableView.reloadData()
-        self.ReceiveTableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
