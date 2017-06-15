@@ -9,66 +9,19 @@
 import UIKit
 import Firebase
 
+var send_requests = [request]()
+var receive_requests = [request]()
+var send_users = [mod_user]()
+var receive_users = [mod_user]()
+
 class request_and_search: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var SendTableView: UITableView!
     @IBOutlet weak var ReceiveTableView: UITableView!
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    
-    
-    var send_requests = [request]()
-    var receive_requests = [request]()
-    var send_users = [mod_user]()
-    var receive_users = [mod_user]()
-
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.SendTableView.delegate = self
-        self.SendTableView.dataSource = self
-        self.ReceiveTableView.delegate = self
-        self.ReceiveTableView.dataSource = self
-        let user = FIRAuth.auth()?.currentUser
-        
-        let ref = FIRDatabase.database().reference()
-        
-        let UserRef = ref.child("users").child(user!.uid).child("Info")
-        UserRef.observe(.value){ ( snap: FIRDataSnapshot) in
-            if  snap.exists() {
-                if let dictionary = snap.value as? [String: AnyObject] {
-                    let tmp = mod_user(dictionary: dictionary)
-                    cur_user = tmp
-                    //print(cur_user.ID)
-                }
-            }
-            self.SendTableView.reloadData()
-            self.ReceiveTableView.reloadData()
-        }
-        
-    FIRDatabase.database().reference().child("request").observe(.childAdded, with: { (snapshot) in
-            if let dictionary = snapshot.value as? [String: AnyObject] {
-                let req = request(dictionary: dictionary)
-    
-                //보낸 요청
-                if(req.sender_ == cur_user.ID && req.status_ == "waiting"){
-                    self.send_requests.append(req)
-                    //print(self.users[0].ID)
-                    //print(self.users.count)
-                }
-                else if(req.receiver_ == cur_user.ID && req.status_ == "waiting"){
-                    self.receive_requests.append(req)
-                }
-            }
-            
-            self.SendTableView.reloadData()
-            self.ReceiveTableView.reloadData()
-            
-        }, withCancel: nil)
-        
+    @IBAction func F5(_ sender: Any) {
+        print(send_requests.count)
+        print(send_users.count)
+        send_users = [mod_user]()
+        receive_users = [mod_user]()
         FIRDatabase.database().reference().child("users").observe(.childAdded, with: { (snapshot) in
             if (snapshot.value as? [String: AnyObject]) != nil {
                 
@@ -81,15 +34,15 @@ class request_and_search: UIViewController, UITableViewDelegate, UITableViewData
                     if let dictionary = snapshot.value as? [String: AnyObject] {
                         let tmp = mod_user(dictionary: dictionary)
                         
-                        for req in self.send_requests {
+                        for req in send_requests {
                             if req.receiver_ == tmp.ID {
-                                self.send_users.append(tmp)
+                                send_users.append(tmp)
                             }
                         }
                         
-                        for req in self.receive_requests {
+                        for req in receive_requests {
                             if req.sender_ == tmp.ID {
-                                self.receive_users.append(tmp)
+                                receive_users.append(tmp)
                             }
                         }
                         //self.users.append(tmp)
@@ -98,25 +51,115 @@ class request_and_search: UIViewController, UITableViewDelegate, UITableViewData
                     }
                     
                     //Once you created all your users, you should call tableView.reloadData()
-                }
-                    , withCancel: nil)
+                }, withCancel: nil)
                 
                 //this will crash because of background thread, so lets use dispatch_async to fix
             }
-            
-        } , withCancel: nil)
-
+        }, withCancel: nil)
+        self.SendTableView.reloadData()
+        self.ReceiveTableView.reloadData()
     }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    
+    
+
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.SendTableView.delegate = self
+        self.SendTableView.dataSource = self
+        self.ReceiveTableView.delegate = self
+        self.ReceiveTableView.dataSource = self
+        
+        send_requests = [request]()
+        receive_requests = [request]()
+        send_users = [mod_user]()
+        receive_users = [mod_user]()
+        let user = FIRAuth.auth()?.currentUser
+        
+        let ref = FIRDatabase.database().reference()
+        
+        let UserRef = ref.child("users").child(user!.uid).child("Info")
+        UserRef.observe(.value){ ( snap: FIRDataSnapshot) in
+            if  snap.exists() {
+                if let dictionary = snap.value as? [String: AnyObject] {
+                    cur_user = mod_user(dictionary: dictionary)
+                }
+            }
+        }
+        
+    FIRDatabase.database().reference().child("request").observe(.childAdded, with: { (snapshot) in
+            if let dictionary = snapshot.value as? [String: AnyObject] {
+                let req = request(dictionary: dictionary)
+    
+                //보낸 요청
+                if(req.sender_ == cur_user.ID && req.status_ == "waiting"){
+                    send_requests.append(req)
+                }
+                else if(req.receiver_ == cur_user.ID && req.status_ == "waiting"){
+                    receive_requests.append(req)
+                }
+        }
+        self.SendTableView.reloadData()
+        self.ReceiveTableView.reloadData()
+        
+    }, withCancel: nil)
+        
+    FIRDatabase.database().reference().child("users").observe(.childAdded, with: { (snapshot) in
+        if (snapshot.value as? [String: AnyObject]) != nil {
+                
+            //개인 auth키
+            let ky = snapshot.key
+                
+            FIRDatabase.database().reference().child("users").child(ky).observe(.childAdded, with: { (snapshot) in
+                    
+                    
+                if let dictionary = snapshot.value as? [String: AnyObject] {
+                    let tmp = mod_user(dictionary: dictionary)
+                        
+                    for req in send_requests {
+                        if req.receiver_ == tmp.ID {
+                            send_users.append(tmp)
+                        }
+                    }
+                        
+                    for req in receive_requests {
+                        if req.sender_ == tmp.ID {
+                            receive_users.append(tmp)
+                        }
+                    }
+                    //self.users.append(tmp)
+                    //print(self.users[0].ID)
+                    //print(self.users.count)
+                }
+                    
+                //Once you created all your users, you should call tableView.reloadData()
+            }, withCancel: nil)
+            
+            //this will crash because of background thread, so lets use dispatch_async to fix
+        }
+        
+        self.SendTableView.reloadData()
+        self.ReceiveTableView.reloadData()
+        
+    }, withCancel: nil)
+
+}
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var count:Int?
         
         if tableView == self.SendTableView {
-            count = self.send_requests.count
+            count = send_requests.count
         }
         
         if tableView == self.ReceiveTableView {
-            count =  self.receive_requests.count
+            count =  receive_requests.count
         }
         
         return count!
@@ -127,19 +170,21 @@ class request_and_search: UIViewController, UITableViewDelegate, UITableViewData
         
         if tableView == SendTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "sendtablecell", for: indexPath) as! SendTableViewCell
-            cell.receiver.text = self.send_requests[indexPath.row].receiver_
-            /*cell.Most_cham.image = UIImage(named: self.send_users[indexPath.row].Champion1! + "_0")
+            print(send_requests.count)
+            print(send_users.count)
+            cell.receiver.text = send_requests[indexPath.row].receiver_
+            //cell.Most_cham.image = UIImage(named: send_users[indexPath.row].Champion1! + "_0")
             //cell.intro.text = self.send_users[indexPath.row].introduce!
             
-            cell.icon.layer.borderWidth = 1
+            /*cell.icon.layer.borderWidth = 1
             cell.icon.layer.masksToBounds = false
             cell.icon.layer.borderColor = UIColor.black.cgColor
             cell.icon.layer.cornerRadius = cell.icon.frame.height/2
             cell.icon.clipsToBounds = true
-            
-            cell.Tier_text.text = self.send_users[indexPath.row].Rank_Solo
+            print(send_users.count)
+            cell.Tier_text.text = send_users[indexPath.row].Rank_Solo
             for str in Tiers {
-                if(self.send_users[indexPath.row].Rank_Solo!.contains(str) == true){
+                if(send_users[indexPath.row].Rank_Solo!.contains(str) == true){
                     cell.Tier_image.image = UIImage(named: str)
                     break
                 }
@@ -150,9 +195,9 @@ class request_and_search: UIViewController, UITableViewDelegate, UITableViewData
         else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "receivetablecell", for: indexPath) as! ReceiveTableViewCell
             
-            cell.sender.text = self.receive_requests[indexPath.row].sender_
-            //cell.Most_cham.image = UIImage(named: self.receive_users[indexPath.row].Champion1! + "_0")
-            //cell.intro.text = self.receive_users[indexPath.row].introduce!
+            cell.sender.text = receive_requests[indexPath.row].sender_
+            //cell.Most_cham.image = UIImage(named: receive_users[indexPath.row].Champion1! + "_0")
+            //cell.intro.text = receive_users[indexPath.row].introduce!
             
             /*cell.icon.layer.borderWidth = 1
             cell.icon.layer.masksToBounds = false
@@ -160,9 +205,9 @@ class request_and_search: UIViewController, UITableViewDelegate, UITableViewData
             cell.icon.layer.cornerRadius = cell.icon.frame.height/2
             cell.icon.clipsToBounds = true
             
-            cell.Tier_text.text = self.receive_users[indexPath.row].Rank_Solo
+            cell.Tier_text.text = receive_users[indexPath.row].Rank_Solo
             for str in Tiers {
-                if(self.receive_users[indexPath.row].Rank_Solo!.contains(str) == true){
+                if(receive_users[indexPath.row].Rank_Solo!.contains(str) == true){
                     cell.Tier_image.image = UIImage(named: str)
                     break
                 }
@@ -171,14 +216,6 @@ class request_and_search: UIViewController, UITableViewDelegate, UITableViewData
         }
         
     }
-    /*func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if tableView == SendTableView {
-            return "보낸 요청"
-        }
-        else {
-            return "받은 요청"
-        }
-    }*/
     
     // MARK: - Navigation
 

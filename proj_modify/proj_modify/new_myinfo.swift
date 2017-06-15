@@ -501,7 +501,7 @@ class new_myinfo: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate
     }
     
     @IBAction func modify_ok(_ sender: Any) {
-        let source_name:String = String(userID.text!)
+        let source_name:String = String(modify_userID.text!)
         
         //ID 안적었을 때
         if (modify_userID.text?.isEmpty)! {

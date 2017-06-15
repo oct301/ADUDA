@@ -341,6 +341,8 @@ class searched_user_info: UIViewController {
                 if req.sender_ == cur_user.ID && req.receiver_ == self.selected_user?.ID && req.status_ == "waiting" {
                     self.alert_window(title_: "듀오요청을 취소했습니다!")
                     FIRDatabase.database().reference().child("request").child(ky).removeValue()
+                    ////send_requests = send_requests.filter{ $0.receiver_ != req.receiver_ }
+                    //
                     //self.performSegue(withIdentifier: "reject_segue", sender: nil)
                     /* DispatchQueue.main.async {
                      self.performSegue(withIdentifier: "reject_sync",sender: self)

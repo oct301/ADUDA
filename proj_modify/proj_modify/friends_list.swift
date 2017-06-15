@@ -17,7 +17,7 @@ class friends_list: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        friends_ = [mod_user]()
         let user = FIRAuth.auth()?.currentUser
         
         let ref = FIRDatabase.database().reference()
@@ -28,7 +28,6 @@ class friends_list: UITableViewController {
                 if let dictionary = snap.value as? [String: AnyObject] {
                     let tmp = mod_user(dictionary: dictionary)
                     cur_user = tmp
-                    //print(cur_user.ID)
                 }
             }
         }
@@ -63,10 +62,10 @@ class friends_list: UITableViewController {
                     
                     if let dictionary = snapshot.value as? [String: AnyObject] {
                         let tmp = mod_user(dictionary: dictionary)
-                        
                         for fri in friends {
-                            if fri == tmp.ID {
+                            if fri == tmp.ID && fri != cur_user.ID{
                                 friends_.append(tmp)
+                                break
                             }
                         }
                         
