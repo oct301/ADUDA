@@ -175,12 +175,12 @@ class request_and_search: UIViewController, UITableViewDelegate, UITableViewData
             cell.receiver.text = send_requests[indexPath.row].receiver_
             //cell.Most_cham.image = UIImage(named: send_users[indexPath.row].Champion1! + "_0")
             //cell.intro.text = self.send_users[indexPath.row].introduce!
-            
-            /*cell.icon.layer.borderWidth = 1
             cell.icon.layer.masksToBounds = false
             cell.icon.layer.borderColor = UIColor.black.cgColor
             cell.icon.layer.cornerRadius = cell.icon.frame.height/2
             cell.icon.clipsToBounds = true
+            /*cell.icon.layer.borderWidth = 1
+            
             print(send_users.count)
             cell.Tier_text.text = send_users[indexPath.row].Rank_Solo
             for str in Tiers {
@@ -198,13 +198,13 @@ class request_and_search: UIViewController, UITableViewDelegate, UITableViewData
             cell.sender.text = receive_requests[indexPath.row].sender_
             //cell.Most_cham.image = UIImage(named: receive_users[indexPath.row].Champion1! + "_0")
             //cell.intro.text = receive_users[indexPath.row].introduce!
-            
-            /*cell.icon.layer.borderWidth = 1
             cell.icon.layer.masksToBounds = false
             cell.icon.layer.borderColor = UIColor.black.cgColor
             cell.icon.layer.cornerRadius = cell.icon.frame.height/2
             cell.icon.clipsToBounds = true
-            
+
+            /*cell.icon.layer.borderWidth = 1
+             
             cell.Tier_text.text = receive_users[indexPath.row].Rank_Solo
             for str in Tiers {
                 if(receive_users[indexPath.row].Rank_Solo!.contains(str) == true){
